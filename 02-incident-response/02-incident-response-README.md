@@ -42,8 +42,6 @@ The following incident reports were written from higher-priority tickets:
 - [`TKT-008-scheduled-task.md`](./incident-reports/TKT-008-scheduled-task.md) — suspicious scheduled task investigation
 - [`TKT-010-drive-by-download.md`](./incident-reports/TKT-010-drive-by-download.md) — malware delivery and containment
 
-See [`incident-report-template.md`](./incident-report-template.md) for the reusable template structure.
-
 ## Skills Demonstrated
 
 - Alert triage and prioritization under a defined framework
