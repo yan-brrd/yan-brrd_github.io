@@ -24,10 +24,10 @@ Alert / Finding  →  Ticket Logged  →  Triage  →  Investigation  →  Repor
 
 | Priority | Criteria | Example |
 |---|---|---|
-| **P1 – Critical** | Active compromise, confirmed data exposure | [example] |
-| **P2 – High** | Strong indicator of compromise, no confirmed impact yet | [example] |
-| **P3 – Medium** | Suspicious but plausible benign explanation | [example] |
-| **P4 – Low** | Informational / noise, logged for trend tracking | [example] |
+| **P1 – Critical** | Active compromise, confirmed data exposure | Confirmed unauthorized admin access with data exfiltration |
+| **P2 – High** | Strong indicator of compromise, no confirmed impact yet | Failed logins followed by a successful login from an unfamiliar IP |
+| **P3 – Medium** | Suspicious but plausible benign explanation | Traffic spike to an unfamiliar IP, possibly a backup job |
+| **P4 – Low** | Informational / noise, logged for trend tracking | Routine scans from known internal scanners |
 
 ## Sample Tickets
 
