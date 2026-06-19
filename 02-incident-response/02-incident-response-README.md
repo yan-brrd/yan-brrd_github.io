@@ -6,7 +6,7 @@
 
 ## Overview
 
-This case covers the part of SOC work that happens *after* detection: deciding what matters, tracking it through to resolution, and writing it up clearly enough that another analyst could pick up the case cold. Findings from the [CASE-001 Splunk dashboard work](../01-splunk-siem-monitoring) fed directly into this workflow.
+This case covers the part of SOC work that happens *after* detection: deciding what matters, tracking it through to resolution, and writing it up clearly enough that another analyst could pick up the [...]
 
 ## Workflow
 
@@ -31,11 +31,18 @@ Alert / Finding  →  Ticket Logged  →  Triage  →  Investigation  →  Repor
 
 ## Sample Tickets
 
-See [`sample-tickets.md`](./sample-tickets.md) for [X] example tickets logged during this lab, showing the fields used and how priority was assigned.
+See [`sample-tickets.md`](./sample-tickets.md) for example tickets logged during this lab, showing the fields used and how priority was assigned.
 
-## Incident Report
+## Incident Reports
 
-See [`incident-report-template.md`](./incident-report-template.md) for the reusable template, and [add filenames] for completed example reports written during this lab.
+The following incident reports were written from higher-priority tickets:
+
+- [`TKT-001-port-scan.md`](./incident-reports/TKT-001-port-scan.md) — reconnaissance activity analysis
+- [`TKT-007-data-exfiltration.md`](./incident-reports/TKT-007-data-exfiltration.md) — confirmed data exfiltration incident (P1)
+- [`TKT-008-scheduled-task.md`](./incident-reports/TKT-008-scheduled-task.md) — suspicious scheduled task investigation
+- [`TKT-010-drive-by-download.md`](./incident-reports/TKT-010-drive-by-download.md) — malware delivery and containment
+
+See [`incident-report-template.md`](./incident-report-template.md) for the reusable template structure.
 
 ## Skills Demonstrated
 
@@ -47,3 +54,4 @@ See [`incident-report-template.md`](./incident-report-template.md) for the reusa
 ## Reflection
 
 [1–3 sentences: what made triage harder than expected, or what you learned about writing reports for someone who wasn't there when the incident happened.]
+
