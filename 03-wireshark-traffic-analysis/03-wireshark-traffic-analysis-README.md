@@ -6,7 +6,7 @@
 
 ## Overview
 
-Most SOC tooling eventually points back to "go look at the packets." This case is about building that habit directly — capturing and reading raw network traffic in Wireshark instead of relying on summarized alerts.
+Most SOC tooling eventually points back to "go look at the packets." This case is about building that habit directly — capturing and reading raw network traffic in Wireshark instead of relying on[...]
 
 ## Lab Environment
 
@@ -44,12 +44,12 @@ tcp.port == 4444
 
 ## Findings
 - Identified a reconnaissance port scan from `45.77.103.22`, which sent SYN packets to 20 different ports against the victim host, with ports 80 and 445 responding SYN-ACK (confirmed open).
-- Detected C2 beaconing behavior from the victim host to `185.220.101.47` over port 4444, with connections recurring at a consistent ~60-second interval — a strong indicator of active malware communicating with a command-and-control server. Packet inspection revealed a plaintext beacon payload identifying the infected host (`BEACON|id=HR01-A3F2|os=Windows10...`).
-- Found evidence of data exfiltration: approximately 64,000 bytes were sent from the victim host to `185.220.101.47` over port 443 with virtually no inbound response, alongside DNS queries to two suspicious domains (`a7x2kfqp.xyz` and `update-svc32.tk`), one of which returned an NXDOMAIN response.
+- Detected C2 beaconing behavior from the victim host to `185.220.101.47` over port 4444, with connections recurring at a consistent ~60-second interval — a strong indicator of active malware commun[...]
+- Found evidence of data exfiltration: approximately 64,000 bytes were sent from the victim host to `185.220.101.47` over port 443 with virtually no inbound response, alongside DNS queries to two susp[...]
 
 ## Screenshots
 
-![Capture screenshot](./screenshots/capture-overview.png)
+[![Capture screenshot](./screenshots/capture-overview.png)](./screenshots/capture-overview.png)
 *Filtered view (`tcp.port == 4444`) showing recurring beacon traffic from the victim host to 185.220.101.47 at ~60-second intervals, with the decoded payload confirming C2 communication.*
 
 ## Skills Demonstrated
@@ -61,4 +61,4 @@ tcp.port == 4444
 
 ## Reflection
 
-The SYN-without-ACK filter (`tcp.flags.syn==1 && tcp.flags.ack==0`) took the longest to get right — understanding *why* that specific combination of flags indicates a scan, rather than just memorizing the syntax, required digging into how the TCP handshake actually works. With more time, I'd spend more time studying TCP flag behavior up front, since a lot of Wireshark filtering really just comes down to knowing the protocol well enough to know what you're filtering for.
+The SYN-without-ACK filter (`tcp.flags.syn==1 && tcp.flags.ack==0`) took the longest to get right — understanding *why* that specific combination of flags indicates a scan, rather than just memorizi[...]
