@@ -12,9 +12,9 @@ Most SOC tooling eventually points back to "go look at the packets." This case i
 
 | Component | Detail |
 |---|---|
-| Capture Tool | Wireshark [version] |
-| Capture Source | [e.g., home lab network interface, sample PCAP set, honeypot segment from CASE-004] |
-| Network Context | [brief description of what traffic was being captured and why] |
+| Capture Tool | Wireshark 4.6.6 |
+| Capture Source | Operation Midnight Crawl Packet Analysis |
+| Captured traffic from a single internal host following an alert for suspicious outbound activity, in order to investigate possible malware C2 communication. |
 
 ## Methodology
 
@@ -25,31 +25,32 @@ Most SOC tooling eventually points back to "go look at the packets." This case i
 
 ## Key Filters Used
 
-> Replace with the filters you actually relied on and a one-line note on what each one isolates.
-
 ```
-# Isolate traffic to/from a specific host
-ip.addr == [x.x.x.x]
+# Isolate all traffic to/from the victim host
+ip.addr == 192.168.10.45
 
 # Spot potential port-scan behavior (SYN without ACK)
 tcp.flags.syn==1 && tcp.flags.ack==0
 
-# Surface plaintext credentials in unencrypted protocols
-http.request and (http contains "password")
+# Surface DNS queries to check for suspicious or randomly-generated domains
+dns
 
-# [Add your own filter here]
+# Isolate large outbound transfers from the victim host (possible data exfiltration)
+ip.src == 192.168.10.45 and tcp.len > 1000
+
+# Inspect traffic on a non-standard port for C2 activity
+tcp.port == 4444
 ```
 
 ## Findings
-
-- [Finding 1 — e.g., "Identified repeated SYN packets from a single source across a range of ports, consistent with a port scan."]
-- [Finding 2]
-- [Finding 3]
+- Identified a reconnaissance port scan from `45.77.103.22`, which sent SYN packets to 20 different ports against the victim host, with ports 80 and 445 responding SYN-ACK (confirmed open).
+- Detected C2 beaconing behavior from the victim host to `185.220.101.47` over port 4444, with connections recurring at a consistent ~60-second interval — a strong indicator of active malware communicating with a command-and-control server. Packet inspection revealed a plaintext beacon payload identifying the infected host (`BEACON|id=HR01-A3F2|os=Windows10...`).
+- Found evidence of data exfiltration: approximately 64,000 bytes were sent from the victim host to `185.220.101.47` over port 443 with virtually no inbound response, alongside DNS queries to two suspicious domains (`a7x2kfqp.xyz` and `update-svc32.tk`), one of which returned an NXDOMAIN response.
 
 ## Screenshots
 
 ![Capture screenshot](./screenshots/capture-overview.png)
-*[One-line caption: what this capture shows and the filter used to find it.]*
+*Filtered view (`tcp.port == 4444`) showing recurring beacon traffic from the victim host to 185.220.101.47 at ~60-second intervals, with the decoded payload confirming C2 communication.*
 
 ## Skills Demonstrated
 
@@ -60,4 +61,4 @@ http.request and (http contains "password")
 
 ## Reflection
 
-[1–3 sentences: what surprised you when you actually looked at the packets versus what you expected, or what filter took the longest to get right.]
+The SYN-without-ACK filter (`tcp.flags.syn==1 && tcp.flags.ack==0`) took the longest to get right — understanding *why* that specific combination of flags indicates a scan, rather than just memorizing the syntax, required digging into how the TCP handshake actually works. With more time, I'd spend more time studying TCP flag behavior up front, since a lot of Wireshark filtering really just comes down to knowing the protocol well enough to know what you're filtering for.
