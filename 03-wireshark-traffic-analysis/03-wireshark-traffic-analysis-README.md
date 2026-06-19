@@ -6,7 +6,7 @@
 
 ## Overview
 
-Most SOC tooling eventually points back to "go look at the packets." This case is about building that habit directly — capturing and reading raw network traffic in Wireshark instead of relying on[...]
+Most SOC tooling eventually points back to "go look at the packets." This case is about building that habit directly — capturing and reading raw network traffic in Wireshark instead of relying on automated alerts or summary reports. By analyzing a suspicious host's traffic patterns, I identified reconnaissance activity, command-and-control beaconing, and data exfiltration — demonstrating how packet-level analysis is essential for confirming and understanding security incidents.
 
 ## Lab Environment
 
@@ -14,7 +14,7 @@ Most SOC tooling eventually points back to "go look at the packets." This case i
 |---|---|
 | Capture Tool | Wireshark 4.6.6 |
 | Capture Source | Operation Midnight Crawl Packet Analysis |
-| Captured traffic from a single internal host following an alert for suspicious outbound activity, in order to investigate possible malware C2 communication. |
+| Objective | Captured traffic from a single internal host following an alert for suspicious outbound activity, in order to investigate possible malware C2 communication. |
 
 ## Methodology
 
@@ -44,8 +44,8 @@ tcp.port == 4444
 
 ## Findings
 - Identified a reconnaissance port scan from `45.77.103.22`, which sent SYN packets to 20 different ports against the victim host, with ports 80 and 445 responding SYN-ACK (confirmed open).
-- Detected C2 beaconing behavior from the victim host to `185.220.101.47` over port 4444, with connections recurring at a consistent ~60-second interval — a strong indicator of active malware commun[...]
-- Found evidence of data exfiltration: approximately 64,000 bytes were sent from the victim host to `185.220.101.47` over port 443 with virtually no inbound response, alongside DNS queries to two susp[...]
+- Detected C2 beaconing behavior from the victim host to `185.220.101.47` over port 4444, with connections recurring at a consistent ~60-second interval — a strong indicator of active malware communication.
+- Found evidence of data exfiltration: approximately 64,000 bytes were sent from the victim host to `185.220.101.47` over port 443 with virtually no inbound response, alongside DNS queries to two suspicious domains with random subdomain patterns.
 
 ## Screenshots
 
@@ -61,4 +61,4 @@ tcp.port == 4444
 
 ## Reflection
 
-The SYN-without-ACK filter (`tcp.flags.syn==1 && tcp.flags.ack==0`) took the longest to get right — understanding *why* that specific combination of flags indicates a scan, rather than just memorizi[...]
+The SYN-without-ACK filter (`tcp.flags.syn==1 && tcp.flags.ack==0`) took the longest to get right — understanding *why* that specific combination of flags indicates a scan, rather than just memorizing it, changed how I approach Wireshark filters overall. Now I think about what I'm trying to observe (in this case, incomplete handshakes typical of reconnaissance) and build the filter from that intent rather than copying examples.
