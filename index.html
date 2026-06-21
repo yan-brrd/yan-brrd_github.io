@@ -26,19 +26,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0F1419;
-    --bg-panel:#161D27;
-    --bg-panel-raised:#1C2531;
-    --border:#26303D;
-    --text:#E9EBEE;
-    --text-muted:#8C96A5;
-    --text-dim:#576172;
-    --amber:#DD9A3D;
-    --amber-dim:rgba(221,154,61,0.14);
-    --teal:#2FBE9F;
-    --teal-dim:rgba(47,190,159,0.14);
-    --red:#E5575C;
-    --red-dim:rgba(229,87,92,0.14);
+    --bg:#0a0e27;
+    --bg-panel:#0f1536;
+    --bg-panel-raised:#151d42;
+    --border:#1a2555;
+    --text:#e0e8ff;
+    --text-muted:#a0aee8;
+    --text-dim:#6b7aa8;
+    --neon-pink:#ff006e;
+    --neon-cyan:#00f5ff;
+    --neon-purple:#b500ff;
+    --neon-green:#39ff14;
+    --neon-orange:#ff6b35;
+    --neon-blue:#0080ff;
+    --gradient-primary:linear-gradient(135deg, #ff006e 0%, #b500ff 50%, #00f5ff 100%);
+    --gradient-accent:linear-gradient(135deg, #0080ff 0%, #00f5ff 100%);
+    --gradient-warm:linear-gradient(135deg, #ff6b35 0%, #ff006e 100%);
     --font-display:'Space Grotesk',sans-serif;
     --font-body:'Inter',sans-serif;
     --font-mono:'JetBrains Mono',monospace;
@@ -61,7 +64,7 @@
   }
 
   a{color:inherit; text-decoration:none;}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--neon-cyan); outline-offset:3px;}
   ul{margin:0; padding:0;}
   img{max-width:100%;}
 
@@ -69,13 +72,14 @@
 
   /* ---------- status bar ---------- */
   .statusbar{
-    background:var(--bg-panel);
-    border-bottom:1px solid var(--border);
+    background:linear-gradient(90deg, #0a0e27 0%, rgba(15, 21, 54, 0.8) 50%, #0a0e27 100%);
+    border-bottom:1px solid var(--neon-cyan);
+    border-bottom-color:rgba(0, 245, 255, 0.3);
     font-family:var(--font-mono);
     font-size:0.72rem;
     letter-spacing:0.06em;
     text-transform:uppercase;
-    color:var(--text-dim);
+    color:var(--neon-cyan);
   }
   .statusbar .wrap{
     display:flex; justify-content:space-between; align-items:center;
@@ -83,38 +87,40 @@
   }
   .statusbar .dot{
     display:inline-block; width:7px; height:7px; border-radius:50%;
-    background:var(--teal); margin-right:8px; position:relative; top:-1px;
+    background:var(--neon-cyan); margin-right:8px; position:relative; top:-1px;
     animation:pulse 2.4s ease-in-out infinite;
+    box-shadow:0 0 10px var(--neon-cyan);
   }
-  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.35;}}
+  @keyframes pulse{0%,100%{opacity:1; box-shadow:0 0 10px var(--neon-cyan);} 50%{opacity:0.35; box-shadow:0 0 5px var(--neon-cyan);}}
 
   /* ---------- nav ---------- */
   nav{
     position:sticky; top:0; z-index:50;
-    background:rgba(15,20,25,0.88);
+    background:rgba(10, 14, 39, 0.92);
     backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--border);
+    border-bottom:1px solid rgba(0, 245, 255, 0.2);
   }
   nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 24px;}
-  .logo{font-family:var(--font-display); font-weight:700; font-size:1.05rem; letter-spacing:0.01em;}
-  .logo span{color:var(--amber);}
+  .logo{font-family:var(--font-display); font-weight:700; font-size:1.05rem; letter-spacing:0.01em; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+  .logo span{color:var(--neon-cyan);}
   .navlinks{display:flex; gap:28px; list-style:none; font-size:0.88rem; color:var(--text-muted);}
-  .navlinks a:hover{color:var(--amber);}
+  .navlinks a:hover{color:var(--neon-cyan); text-shadow:0 0 8px rgba(0, 245, 255, 0.6);}
   @media (max-width:640px){ .navlinks{gap:16px; font-size:0.8rem;} }
 
   /* ---------- shared section heading ---------- */
   section{padding:88px 0; border-bottom:1px solid var(--border);}
   .eyebrow{
     font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.12em;
-    font-size:0.78rem; color:var(--amber); margin-bottom:14px; display:block;
+    font-size:0.78rem; background:linear-gradient(90deg, #ff006e, #b500ff, #00f5ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:14px; display:block;
   }
-  h2{font-family:var(--font-display); font-size:clamp(1.6rem,3.4vw,2.3rem); margin:0 0 36px; font-weight:700;}
+  h2{font-family:var(--font-display); font-size:clamp(1.6rem,3.4vw,2.3rem); margin:0 0 36px; font-weight:700; background:linear-gradient(135deg, #00f5ff, #b500ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
 
   /* ---------- hero ---------- */
   .hero{padding-top:96px; padding-bottom:72px; border-bottom:1px solid var(--border);}
   .hero h1{
     font-family:var(--font-display); font-weight:700;
     font-size:clamp(2rem,5vw,3.4rem); line-height:1.16; margin:0 0 24px; max-width:760px;
+    background:linear-gradient(135deg, #ff006e, #00f5ff, #b500ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
   }
   .hero p.sub{color:var(--text-muted); max-width:560px; font-size:1.05rem; margin:0 0 48px;}
 
@@ -122,12 +128,17 @@
   @media (max-width:680px){ .ticket-queue{grid-template-columns:1fr;} }
   .ticket-row{
     display:flex; align-items:center; justify-content:space-between; gap:12px;
-    background:var(--bg-panel); border:1px solid var(--border); border-radius:8px;
-    padding:14px 18px; transition:transform 0.15s ease, background 0.15s ease;
+    background:var(--bg-panel); border:1px solid rgba(0, 245, 255, 0.3); border-radius:8px;
+    padding:14px 18px; transition:all 0.15s ease;
   }
-  .ticket-row:hover{background:var(--bg-panel-raised); transform:translateY(-2px);}
+  .ticket-row:hover{
+    background:var(--bg-panel-raised);
+    transform:translateY(-2px);
+    border-color:var(--neon-cyan);
+    box-shadow:0 4px 16px rgba(0, 245, 255, 0.15);
+  }
   .ticket-left{display:flex; flex-direction:column; gap:3px; min-width:0;}
-  .ticket-id{font-family:var(--font-mono); font-size:0.72rem; color:var(--text-dim); letter-spacing:0.05em;}
+  .ticket-id{font-family:var(--font-mono); font-size:0.72rem; color:var(--neon-cyan); letter-spacing:0.05em;}
   .ticket-title{font-size:0.93rem; font-weight:500;}
 
   /* ---------- pills ---------- */
@@ -136,70 +147,83 @@
     font-size:0.66rem; padding:4px 10px; border-radius:4px; border:1px solid currentColor;
     white-space:nowrap; flex-shrink:0;
   }
-  .pill-teal{color:var(--teal); background:var(--teal-dim);}
-  .pill-amber{color:var(--amber); background:var(--amber-dim);}
-  .pill-red{color:var(--red); background:var(--red-dim);}
+  .pill-teal{color:var(--neon-cyan); background:rgba(0, 245, 255, 0.12); border-color:var(--neon-cyan);}
+  .pill-amber{color:var(--neon-orange); background:rgba(255, 107, 53, 0.12); border-color:var(--neon-orange);}
+  .pill-red{color:var(--neon-pink); background:rgba(255, 0, 110, 0.12); border-color:var(--neon-pink);}
 
   /* ---------- about ---------- */
   .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:start;}
   @media (max-width:760px){ .about-grid{grid-template-columns:1fr; gap:32px;} }
   .about-text p{color:var(--text-muted); font-size:1rem; margin:0 0 16px;}
-  .about-text p strong{color:var(--text); font-weight:600;}
+  .about-text p strong{color:var(--neon-cyan); font-weight:600;}
   .chip-cloud{display:flex; flex-wrap:wrap; gap:8px;}
   .chip{
-    font-family:var(--font-mono); font-size:0.74rem; color:var(--text-muted);
-    background:var(--bg-panel); border:1px solid var(--border); border-radius:20px; padding:5px 12px;
+    font-family:var(--font-mono); font-size:0.74rem; color:var(--neon-cyan);
+    background:rgba(0, 245, 255, 0.08); border:1px solid rgba(0, 245, 255, 0.3); border-radius:20px; padding:5px 12px;
   }
   .about-side{font-family:var(--font-mono); font-size:0.8rem;}
   .about-side h4{
-    text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); font-size:0.72rem;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--neon-pink); font-size:0.72rem;
     margin:0 0 12px; font-weight:600;
   }
 
   /* ---------- case cards ---------- */
   .case-card{
-    position:relative; background:var(--bg-panel); border:1px solid var(--border);
+    position:relative; background:linear-gradient(135deg, rgba(15, 21, 54, 0.8) 0%, rgba(21, 29, 66, 0.6) 100%);
+    border:1px solid rgba(0, 245, 255, 0.2);
     border-radius:10px; padding:36px; margin-bottom:28px;
-    opacity:0; transform:translateY(14px); transition:opacity 0.5s ease, transform 0.5s ease;
+    opacity:0; transform:translateY(14px); transition:all 0.5s ease;
+    overflow:hidden;
+  }
+  .case-card::before{
+    content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+    background:linear-gradient(135deg, rgba(255, 0, 110, 0) 0%, rgba(181, 0, 255, 0.05) 100%);
+    pointer-events:none;
   }
   .case-card.is-visible{opacity:1; transform:translateY(0);}
+  .case-card:hover{
+    border-color:rgba(0, 245, 255, 0.5);
+    box-shadow:0 8px 32px rgba(0, 245, 255, 0.15), inset 0 0 1px rgba(0, 245, 255, 0.1);
+  }
   .case-card:last-child{margin-bottom:0;}
   .case-stamp{
     position:absolute; top:30px; right:32px; transform:rotate(-7deg);
-    border:2px solid var(--teal); color:var(--teal); padding:4px 12px; border-radius:5px;
+    border:2px solid var(--neon-cyan); color:var(--neon-cyan); padding:4px 12px; border-radius:5px;
     font-family:var(--font-mono); font-weight:700; text-transform:uppercase;
     letter-spacing:0.14em; font-size:0.66rem; opacity:0.9;
+    text-shadow:0 0 10px rgba(0, 245, 255, 0.5);
+    z-index:1;
   }
   @media (max-width:560px){ .case-stamp{display:none;} }
-  .case-id{font-family:var(--font-mono); color:var(--text-dim); font-size:0.78rem; letter-spacing:0.05em; margin-bottom:8px; display:block;}
-  .case-card h3{font-family:var(--font-display); font-size:1.35rem; margin:0 0 14px; max-width:80%;}
+  .case-id{font-family:var(--font-mono); color:var(--neon-pink); font-size:0.78rem; letter-spacing:0.05em; margin-bottom:8px; display:block;}
+  .case-card h3{font-family:var(--font-display); font-size:1.35rem; margin:0 0 14px; max-width:80%; background:linear-gradient(135deg, #00f5ff, #b500ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
   .case-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;}
   .tool-chip{
-    font-family:var(--font-mono); font-size:0.72rem; color:var(--text-muted);
-    background:var(--bg-panel-raised); border:1px solid var(--border); border-radius:20px; padding:4px 11px;
+    font-family:var(--font-mono); font-size:0.72rem; color:var(--neon-blue);
+    background:rgba(0, 128, 255, 0.1); border:1px solid rgba(0, 128, 255, 0.3); border-radius:20px; padding:4px 11px;
   }
   .case-label{
     font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.1em;
-    font-size:0.68rem; color:var(--text-dim); margin:20px 0 8px; display:block;
+    font-size:0.68rem; color:var(--neon-pink); margin:20px 0 8px; display:block;
   }
   .case-card p{color:var(--text-muted); margin:0; font-size:0.95rem;}
   .case-card ul{margin:0; padding-left:20px; color:var(--text-muted); font-size:0.95rem;}
   .case-card ul li{margin-bottom:8px;}
-  .case-card ul li::marker{color:var(--amber);}
+  .case-card ul li::marker{color:var(--neon-cyan);}
   .skill-tags{display:flex; flex-wrap:wrap; gap:8px;}
   .skill-tag{
-    font-family:var(--font-mono); font-size:0.72rem; color:var(--amber);
-    background:var(--amber-dim); border:1px solid rgba(221,154,61,0.35); border-radius:20px; padding:4px 11px;
+    font-family:var(--font-mono); font-size:0.72rem; color:var(--neon-green);
+    background:rgba(57, 255, 20, 0.12); border:1px solid rgba(57, 255, 20, 0.35); border-radius:20px; padding:4px 11px;
   }
   .evidence{
-    margin-top:22px; padding-top:18px; border-top:1px dashed var(--border);
+    margin-top:22px; padding-top:18px; border-top:1px dashed var(--neon-purple);
     font-family:var(--font-mono); font-size:0.8rem; color:var(--text-dim); font-style:italic;
   }
-  .evidence a{color:var(--teal); font-style:normal; text-decoration:underline; text-decoration-color:rgba(47,190,159,0.4);}
-  .evidence a:hover{color:var(--amber);}
+  .evidence a{color:var(--neon-cyan); font-style:normal; text-decoration:underline; text-decoration-color:rgba(0, 245, 255, 0.4);}
+  .evidence a:hover{color:var(--neon-green); text-shadow:0 0 8px rgba(57, 255, 20, 0.5);}
 
   /* ---------- timeline ---------- */
-  .timeline{list-style:none; border-left:1px solid var(--border); padding-left:0; margin:0;}
+  .timeline{list-style:none; border-left:2px solid var(--neon-purple); padding-left:0; margin:0;}
   .timeline-item{
     position:relative; padding:0 0 36px 32px;
     opacity:0; transform:translateY(10px); transition:opacity 0.5s ease, transform 0.5s ease;
@@ -207,36 +231,52 @@
   .timeline-item.is-visible{opacity:1; transform:translateY(0);}
   .timeline-item:last-child{padding-bottom:0;}
   .timeline-item::before{
-    content:''; position:absolute; left:-5px; top:4px; width:9px; height:9px;
-    border-radius:50%; background:var(--bg); border:2px solid var(--amber);
+    content:''; position:absolute; left:-6px; top:4px; width:10px; height:10px;
+    border-radius:50%; background:var(--bg); border:2px solid var(--neon-cyan);
+    box-shadow:0 0 8px rgba(0, 245, 255, 0.6);
   }
-  .timeline-day{font-family:var(--font-mono); color:var(--amber); font-size:0.78rem; letter-spacing:0.06em; margin-bottom:4px; display:block;}
-  .timeline-item h4{font-family:var(--font-display); font-size:1.05rem; margin:0 0 6px;}
+  .timeline-day{font-family:var(--font-mono); color:var(--neon-pink); font-size:0.78rem; letter-spacing:0.06em; margin-bottom:4px; display:block;}
+  .timeline-item h4{font-family:var(--font-display); font-size:1.05rem; margin:0 0 6px; color:var(--neon-cyan);}
   .timeline-item p{color:var(--text-muted); margin:0; font-size:0.92rem; max-width:560px;}
 
   /* ---------- skills matrix ---------- */
   .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:28px;}
   @media (max-width:680px){ .skills-grid{grid-template-columns:1fr;} }
-  .skill-cat{background:var(--bg-panel); border:1px solid var(--border); border-radius:10px; padding:24px;}
-  .skill-cat h4{font-family:var(--font-display); font-size:1rem; margin:0 0 14px;}
-  .skill-cat .chip-cloud .chip{color:var(--text-muted);}
+  .skill-cat{
+    background:linear-gradient(135deg, rgba(15, 21, 54, 0.8) 0%, rgba(21, 29, 66, 0.6) 100%);
+    border:1px solid rgba(0, 245, 255, 0.2); border-radius:10px; padding:24px;
+    transition:all 0.3s ease;
+  }
+  .skill-cat:hover{
+    border-color:rgba(0, 245, 255, 0.5);
+    box-shadow:0 8px 24px rgba(0, 245, 255, 0.1);
+  }
+  .skill-cat h4{font-family:var(--font-display); font-size:1rem; margin:0 0 14px; background:linear-gradient(135deg, #00f5ff, #b500ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+  .skill-cat .chip-cloud .chip{color:var(--neon-cyan);}
 
   /* ---------- contact ---------- */
   .contact-ticket{
-    background:var(--bg-panel); border:1px solid var(--border); border-radius:10px;
+    background:linear-gradient(135deg, rgba(15, 21, 54, 0.9) 0%, rgba(21, 29, 66, 0.7) 100%);
+    border:1px solid rgba(0, 245, 255, 0.3); border-radius:10px;
     padding:40px; position:relative; max-width:640px;
+    transition:all 0.3s ease;
+  }
+  .contact-ticket:hover{
+    border-color:rgba(0, 245, 255, 0.6);
+    box-shadow:0 8px 32px rgba(0, 245, 255, 0.15);
   }
   .contact-stamp{
     position:absolute; top:32px; right:34px; transform:rotate(-7deg);
-    border:2px solid var(--amber); color:var(--amber); padding:4px 12px; border-radius:5px;
+    border:2px solid var(--neon-pink); color:var(--neon-pink); padding:4px 12px; border-radius:5px;
     font-family:var(--font-mono); font-weight:700; text-transform:uppercase;
     letter-spacing:0.14em; font-size:0.66rem;
+    text-shadow:0 0 10px rgba(255, 0, 110, 0.5);
   }
   @media (max-width:560px){ .contact-stamp{display:none;} }
-  .field-row{display:flex; gap:18px; padding:11px 0; border-bottom:1px solid var(--border); font-size:0.92rem;}
+  .field-row{display:flex; gap:18px; padding:11px 0; border-bottom:1px solid rgba(0, 245, 255, 0.15); font-size:0.92rem;}
   .field-row:last-of-type{border-bottom:none;}
-  .field-key{font-family:var(--font-mono); color:var(--text-dim); text-transform:uppercase; font-size:0.7rem; letter-spacing:0.08em; width:110px; flex-shrink:0; padding-top:3px;}
-  .field-val a:hover{color:var(--amber);}
+  .field-key{font-family:var(--font-mono); color:var(--neon-pink); text-transform:uppercase; font-size:0.7rem; letter-spacing:0.08em; width:110px; flex-shrink:0; padding-top:3px;}
+  .field-val a:hover{color:var(--neon-cyan); text-shadow:0 0 8px rgba(0, 245, 255, 0.6);}
   footer{padding:32px 0; text-align:center; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim);}
 </style>
 </head>
@@ -266,7 +306,7 @@
     <div class="wrap">
       <span class="eyebrow">SOC Analyst Portfolio / Training Lab</span>
       <h1>Four cases. Four disciplines.<br>One 15-day deep dive into threat monitoring.</h1>
-      <p class="sub">A self-directed home lab program covering SIEM detection, network forensics, honeypot intelligence, and incident response — built to develop real SOC analyst habits before day one on the job.</p>
+      <p class="sub">A self-directed home lab program covering SIEM detection, network forensics, honeypot intelligence, and incident response — built to develop real SOC analyst habits before day one.</p>
 
       <div class="ticket-queue">
         <a class="ticket-row" href="#case-001">
@@ -307,8 +347,8 @@
       <h2>Why this lab exists</h2>
       <div class="about-grid">
         <div class="about-text">
-          <p>I'm <strong>Adrian Gian Barredo</strong>, an aspiring SOC Analyst building hands-on detection and response skills outside the classroom. Over 15 intensive days I set up a home lab to practice the full lifecycle of a security incident — from raw packet capture to a written report — using the same categories of tooling found in real SOC environments.</p>
-          <p>I'm a graduating Computer Engineering student looking to broaden my scope beyond what's covered in a typical curriculum. Cybersecurity caught my interest early on, and this lab was my chance to move past theory and actually get hands-on with the tools and workflows a SOC analyst uses day to day. I'm aiming to break into an entry-level SOC Analyst or Security Operations role where I can keep building on this foundation.</p>
+          <p>I'm <strong>Adrian Gian Barredo</strong>, an aspiring SOC Analyst building hands-on detection and response skills outside the classroom. Over 15 intensive days I set up a home lab to practice the four pillars of SOC work: detection, forensics, threat intelligence, and incident response.</p>
+          <p>I'm a graduating Computer Engineering student looking to broaden my scope beyond what's covered in a typical curriculum. Cybersecurity caught my interest early on, and this lab was my chance to go deeper — to build the habits that separate a SOC analyst from someone who just knows the terminology.</p>
         </div>
         <div class="about-side">
           <h4>Lab Stack</h4>
@@ -341,11 +381,11 @@
           <span class="tool-chip">SPL</span>
         </div>
         <span class="case-label">Objective</span>
-        <p>Stand up a working SIEM environment and turn raw security logs into actionable visual monitoring, using "Boss of the SOC" v2 — an industry-standard dataset simulating a real breach against a fictional company.</p>
+        <p>Stand up a working SIEM environment and turn raw security logs into actionable visual monitoring, using "Boss of the SOC" v2 — an industry-standard dataset simulating a real breach against a fictional organization.</p>
         <span class="case-label">What I Did</span>
         <ul>
           <li>Ingested and explored the BOTSv2 dataset in Splunk, learning its index and sourcetype structure before writing any searches.</li>
-          <li>Wrote SPL queries to surface indicators of compromise — <em>[e.g., suspicious authentication activity, anomalous process execution, unusual DNS query patterns — swap in what you actually focused on]</em>.</li>
+          <li>Wrote SPL queries to surface indicators of compromise — e.g., suspicious authentication activity, anomalous process execution, unusual DNS query patterns.</li>
           <li>Designed and built Splunk dashboards from scratch: panels, visualizations, and time-range controls aimed at giving an analyst a fast read on environment health.</li>
           <li>Rehearsed the dashboard as a live demo, practicing how to walk a non-technical audience through what each panel means and why it matters.</li>
         </ul>
@@ -356,7 +396,7 @@
           <span class="skill-tag">Dashboard Design</span>
           <span class="skill-tag">Technical Presenting</span>
         </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/01-splunk-siem-monitoring"" target="_blank" rel="noopener">/01-splunk-siem-monitoring</a> — SPL queries, dashboard exports, screenshots</div>
+        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/01-splunk-siem-monitoring" target="_blank" rel="noopener">/01-splunk-siem-monitoring</a> — SPL queries and dashboard exports</div>
       </article>
 
       <article class="case-card" id="case-002">
@@ -373,7 +413,7 @@
         <span class="case-label">What I Did</span>
         <ul>
           <li>Logged alerts and findings from the Splunk dashboard work as tickets, rather than leaving them as one-off searches.</li>
-          <li>Practiced triage: assigning priority and severity based on <em>[e.g., asset criticality, likelihood, potential business impact]</em> instead of treating every alert the same.</li>
+          <li>Practiced triage: assigning priority and severity based on asset criticality, likelihood, potential business impact instead of treating every alert the same.</li>
           <li>Wrote structured incident reports for higher-priority cases — summary, timeline of events, indicators of compromise, and recommended remediation steps.</li>
           <li>Treated documentation as a deliverable in itself: a finding that isn't written up clearly doesn't help the next analyst on shift.</li>
         </ul>
@@ -384,7 +424,7 @@
           <span class="skill-tag">Ticketing Workflows</span>
           <span class="skill-tag">Incident Reporting</span>
         </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/02-incident-response-README.md" target="_blank" rel="noopener">/02-incident-response</a> — report template and example tickets</div>
+        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/02-incident-response" target="_blank" rel="noopener">/02-incident-response</a> — sample tickets and incident report templates</div>
       </article>
 
       <article class="case-card" id="case-003">
@@ -400,7 +440,7 @@
         <span class="case-label">What I Did</span>
         <ul>
           <li>Captured and analyzed live and saved traffic in Wireshark, reading the protocol hierarchy before drilling into individual frames.</li>
-          <li>Used display filters to isolate specific conversations and suspicious patterns — <em>[e.g., unexpected ports, plaintext credentials, repeated connection attempts]</em>.</li>
+          <li>Used display filters to isolate specific conversations and suspicious patterns — e.g., unexpected ports, plaintext credentials, repeated connection attempts.</li>
           <li>Followed TCP streams end-to-end to reconstruct what actually happened in a session, not just that something happened.</li>
           <li>Compared baseline "normal" traffic against anomalous captures to build a feel for what should draw an analyst's attention.</li>
         </ul>
@@ -411,7 +451,7 @@
           <span class="skill-tag">Traffic Baselining</span>
           <span class="skill-tag">Anomaly ID</span>
         </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/03-wireshark-traffic-analysis" target="_blank" rel="noopener">/03-wireshark-traffic-analysis</a> — capture notes and filter examples</div>
+        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/03-wireshark-traffic-analysis" target="_blank" rel="noopener">/03-wireshark-traffic-analysis</a> — Wireshark captures and analysis notes</div>
       </article>
 
       <article class="case-card" id="case-004">
@@ -440,7 +480,7 @@
           <span class="skill-tag">Log Analysis</span>
           <span class="skill-tag">Attacker TTP ID</span>
         </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/04-kali-honeypot-homelab-README.md" target="_blank" rel="noopener">/04-kali-honeypot-homelab</a> — network diagram and log analysis notes</div>
+        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/04-kali-honeypot-homelab" target="_blank" rel="noopener">/04-kali-honeypot-homelab</a> — honeypot config and sample logs</div>
       </article>
 
     </div>
@@ -527,7 +567,7 @@
         <div class="field-row"><span class="field-key">Reporter</span><span class="field-val">Adrian Gian Barredo</span></div>
         <div class="field-row"><span class="field-key">Priority</span><span class="field-val">Entry-Level SOC Analyst / Security Operations roles</span></div>
         <div class="field-row"><span class="field-key">Email</span><span class="field-val"><a href="mailto:agpbarredo@gmail.com">agpbarredo@gmail.com</a></span></div>
-        <div class="field-row"><span class="field-key">GitHub</span><span class="field-val"><a href="https://github.com/yan-brrd/yan-brrd_github.io" target="_blank" rel="noopener">github.com/drewmode/AndrewDiola</a></span></div>
+        <div class="field-row"><span class="field-key">GitHub</span><span class="field-val"><a href="https://github.com/yan-brrd/yan-brrd_github.io" target="_blank" rel="noopener">github.com/yan-brrd</a></span></div>
         <div class="field-row"><span class="field-key">Status</span><span class="field-val"><span class="pill pill-amber">Open</span></span></div>
       </div>
     </div>
