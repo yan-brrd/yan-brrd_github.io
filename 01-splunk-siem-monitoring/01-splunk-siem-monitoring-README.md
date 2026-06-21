@@ -27,8 +27,6 @@ This case covers standing up a working SIEM environment and learning to turn raw
 
 ## Key SPL Queries
 
-> Replace these with your actual queries and a one-line note on what each one is hunting for.
-
 ```spl
 # Counting events by sourcetype to see overall log volume across the dataset
 index=botsv2 sourcetype=*
