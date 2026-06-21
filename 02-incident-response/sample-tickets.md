@@ -12,7 +12,7 @@
 | **Linked Report** | [Incident Report TKT-001](./incident-reports/TKT-001-port-scan.md) |
 
 **Scenario:**
-The SOC received an IDS alert flagging unusual inbound traffic. An external IP was observed generating a high volume of connection attempts against an internal Frothly web server (`172.31.38.181`) across multiple ports in a short time window. No successful authentication was logged. Investigation confirmed the activity as an aggressive automated port scan from `111.249.38.34`, probing 5 distinct ports (22, 80, 443, 3389, 8080) with roughly 1,250 connection attempts in a 10-second window — consistent with reconnaissance-phase activity (MITRE T1595.002) rather than active exploitation.
+The SOC received an IDS alert flagging unusual inbound traffic. An external IP was observed generating a high volume of connection attempts against an internal Frothly web server (`172.31.38.181`) across multiple ports in a short time window. No successful authentication was logged. Investigation confirmed the activity as an aggressive automated port scan from `111.249.38.34`, probing 5 distinct ports (22, 80, 443, 3389, 8080) with roughly 1,250 connection attempts in a 10-second window, consistent with reconnaissance-phase activity (MITRE T1595.002) rather than active exploitation.
 
 ---
 
@@ -44,7 +44,7 @@ A DLP alert fired after detecting an unusually large outbound data transfer from
 | **Linked Report** | [Incident Report TKT-008](./incident-reports/TKT-008-scheduled-task.md) |
 
 **Scenario:**
-Windows Security logs recorded the creation of a new scheduled task on a Frothly workstation. The task name closely mimics a legitimate Windows service name. It was created by a non-administrative user account and is configured to execute a binary located in a user-writable temp directory at a frequent interval — a classic persistence technique used by malware after initial compromise.
+Windows Security logs recorded the creation of a new scheduled task on a Frothly workstation. The task name closely mimics a legitimate Windows service name. It was created by a non-administrative user account and is configured to execute a binary located in a user-writable temp directory at a frequent interval, a classic persistence technique used by malware after initial compromise.
 
 ---
 
