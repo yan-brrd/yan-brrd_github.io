@@ -12,11 +12,11 @@ A honeypot gives a firsthand, unfiltered look at what automated attackers actual
 
 | Component | Detail |
 |---|---|
-| Host OS | Kali Linux [version] |
-| Honeypot Software | [e.g., Cowrie / Dionaea / T-Pot] |
-| Virtualization | [e.g., VirtualBox / VMware / Proxmox] |
-| Network Isolation | [e.g., host-only adapter / isolated VLAN / separate virtual switch with no route to personal devices] |
-| Exposure | [e.g., exposed only within the lab network / port-forwarded from router for internet-facing test] |
+| Host OS | Kali Linux 2026.1 |
+| Honeypot Software | Cowrie |
+| Virtualization | VirtualBox |
+| Network Isolation | Bridged Adapter |
+| Exposure | Exposed only within the lab network |
 
 ## Network Diagram
 
