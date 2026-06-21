@@ -15,7 +15,7 @@ This case covers standing up a working SIEM environment and learning to turn raw
 | SIEM Platform | Splunk Enterprise 4.78.0 |
 | Dataset | BOTSv2 |
 | Indexes Used | `botsv2` |
-| Key Sourcetypes | `[e.g., WinEventLog:Security, stream:http, suricata]` |
+| Key Sourcetypes | `mysql:server:stats, mysql:transaction:details, stream:http` |
 | Deployment | Docker |
 
 ## Methodology
