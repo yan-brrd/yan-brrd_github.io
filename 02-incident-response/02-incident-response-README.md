@@ -2,11 +2,11 @@
 
 # CASE-002 · Incident Triage, Ticketing & Reporting
 
-`Status: Documented` · `Category: Incident Response` · `Tools: [Ticketing platform], Incident Report Writing`
+`Status: Documented` · `Category: Incident Response` · `Tools: Incident Report Writing`
 
 ## Overview
 
-This case covers the part of SOC work that happens *after* detection: deciding what matters, tracking it through to resolution, and writing it up clearly enough that another analyst could pick up the [...]
+This case covers the part of SOC work that happens after detection: deciding what matters, tracking it through to resolution, and writing it up clearly enough that another analyst could pick up the investigation later or reference it for pattern matching.
 
 ## Workflow
 
