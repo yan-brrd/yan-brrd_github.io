@@ -12,7 +12,7 @@
 | **Linked Report** | [Incident Report TKT-001](./incident-reports/TKT-001-port-scan.md) |
 
 **Scenario:**
-The SOC received an IDS alert flagging unusual inbound traffic. An external IP was observed generating a high volume of connection attempts against an internal Frothly web server (`172.31.38.181`) acr[...]
+The SOC received an IDS alert flagging unusual inbound traffic. An external IP was observed generating a high volume of connection attempts against an internal Frothly web server (`172.31.38.181`) across multiple ports in a short time window. No successful authentication was logged. Investigation confirmed the activity as an aggressive automated port scan from `111.249.38.34`, probing 5 distinct ports (22, 80, 443, 3389, 8080) with roughly 1,250 connection attempts in a 10-second window — consistent with reconnaissance-phase activity (MITRE T1595.002) rather than active exploitation.
 
 ---
 
@@ -28,7 +28,7 @@ The SOC received an IDS alert flagging unusual inbound traffic. An external IP w
 | **Linked Report** | [Incident Report TKT-007](./incident-reports/TKT-007-data-exfiltration.md) |
 
 **Scenario:**
-A DLP alert fired after detecting an unusually large outbound data transfer from a Frothly internal host to an external IP (`52.40.10.231`) not in the corporate whitelist. The transfer occurred via mu[...]
+A DLP alert fired after detecting an unusually large outbound data transfer from a Frothly internal host to an external IP (`52.40.10.231`) not in the corporate whitelist. The transfer occurred via multiple HTTP POST requests over a short period, with a generic binary (`application/octet-stream`) payload — a red flag since it suggests an attempt to mask the data and evade deep-packet inspection. The source host (`10.0.1.100`) had previously exhibited suspicious PowerShell activity. Investigation confirmed 243.5 MB transmitted across 45 POST requests in a 3-minute window (~81.17 MB/min), consistent with exfiltration-phase activity (MITRE T1048.003) following prior host compromise.
 
 ---
 
