@@ -6,7 +6,7 @@
 
 ## Overview
 
-A honeypot gives a firsthand, unfiltered look at what automated attackers actually do — without putting real systems at risk. This case covers deploying one inside an isolated home lab segment and a[...] 
+A honeypot gives a firsthand, unfiltered look at what automated attackers actually do, without putting real systems at risk. This case covers deploying one inside an isolated home lab segment and analyzing the resulting connection and login data. The goal wasn't to capture real-world internet attack traffic, since the lab was kept deliberately offline from the public internet for safety, but to build and validate a working honeypot pipeline end to end: network isolation, transparent port redirection, credential logging, and session capture, the same foundation a production threat-intelligence deployment would build on.
 
 ## Lab Environment
 
