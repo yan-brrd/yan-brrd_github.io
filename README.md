@@ -1,12 +1,9 @@
 <!--
-  BEFORE PUBLISHING, replace every bracketed placeholder:
-  [Your Name], [your.email@example.com], [linkedin.com/in/you], [github.com/you],
-  [Honeypot tool], [Ticketing platform], [Year]
-  Also swap the italic "e.g." notes inside each case for what you actually did,
-  and adjust the 15-Day Timeline to match your real schedule.
+  README updated to reflect the content of index.html in the repo.
+  Placeholders replaced with values from index.html where available.
 -->
 
-# 🛡️ [Your Name] — SOC Analyst Portfolio
+# 🛡️ Adrian Gian Barredo — SOC Analyst Portfolio
 
 **15-day self-directed training lab:** SIEM threat detection, network forensics, honeypot threat intelligence, and incident response.
 
@@ -16,9 +13,9 @@
 ![Kali Linux](https://img.shields.io/badge/Lab-Kali%20Linux-557C94?style=flat-square)
 ![License](https://img.shields.io/badge/docs-MIT-8C96A5?style=flat-square)
 
-> A home lab project built to practice the full lifecycle of a security incident — from raw packet capture to a written report — using the same categories of tooling found in real SOC environments. Built in 15 days as a self-directed program, not a job; treat this as evidence of hands-on initiative going into entry-level SOC / security operations roles.
+> A home lab project built to practice the full lifecycle of a security incident — from raw packet capture to a written report — using the same categories of tooling found in real SOC environments.
 
-🔗 **Live site:** `[add your GitHub Pages / hosted link here]`
+🔗 **Live site:** https://yan-brrd.github.io/yan-brrd_github.io
 
 ---
 
@@ -39,9 +36,9 @@
 
 ## About
 
-I'm **[Your Name]**, an aspiring SOC Analyst building hands-on detection and response skills outside the classroom. [Add 2–3 sentences: your background before this lab, what drew you to security, and the type of role you're targeting.]
+I'm **Adrian Gian Barredo**, an aspiring SOC Analyst building hands-on detection and response skills outside the classroom. Over 15 intensive days I set up a home lab to practice real SOC workflows and tooling.
 
-**Lab stack:** Splunk Enterprise · BOTSv2 Dataset · Wireshark · Kali Linux · [Honeypot tool] · [Ticketing platform]
+**Lab stack:** Splunk Enterprise · BOTSv2 Dataset · Wireshark · Kali Linux · Cowrie honeypot · sample ticketing / incident reporting workflow
 
 ---
 
@@ -52,11 +49,11 @@ Each case below mirrors a real SOC workflow stage — detection, response, netwo
 ### CASE-001 · SIEM Threat Detection & Dashboard Build
 `Detection & Monitoring` · `Splunk Enterprise` · `BOTSv2 Dataset` · `SPL` · **Status: Documented**
 
-**Objective:** Stand up a working SIEM environment and turn raw security logs into actionable visual monitoring, using "Boss of the SOC" v2 — an industry-standard dataset simulating a real breach against a fictional company.
+**Objective:** Stand up a working SIEM environment and turn raw security logs into actionable visual monitoring, using "Boss of the SOC" v2 — an industry-standard dataset simulating a real breach against enterprise telemetry.
 
 **What I did:**
 - Ingested and explored the BOTSv2 dataset in Splunk, learning its index and sourcetype structure before writing any searches.
-- Wrote SPL queries to surface indicators of compromise — *[e.g., suspicious authentication activity, anomalous process execution, unusual DNS query patterns — swap in what you actually focused on]*.
+- Wrote SPL queries to surface indicators of compromise — suspicious authentication activity, anomalous process execution, and unusual DNS query patterns.
 - Designed and built Splunk dashboards from scratch: panels, visualizations, and time-range controls for a fast read on environment health.
 - Rehearsed the dashboard as a live demo, practicing how to walk a non-technical audience through what each panel means.
 
@@ -67,13 +64,13 @@ Each case below mirrors a real SOC workflow stage — detection, response, netwo
 ---
 
 ### CASE-002 · Incident Triage, Ticketing & Reporting
-`Incident Response` · `[Ticketing platform]` · **Status: Documented**
+`Incident Response` · `Sample ticketing / reporting` · **Status: Documented**
 
 **Objective:** Practice the part of SOC work that happens after detection — deciding what matters, tracking it, and writing it up the way a real analyst hands a case off to the next shift.
 
 **What I did:**
 - Logged alerts and findings from the Splunk dashboard work as tickets, rather than leaving them as one-off searches.
-- Practiced triage: assigning priority and severity based on *[e.g., asset criticality, likelihood, potential business impact]* instead of treating every alert the same.
+- Practiced triage: assigning priority and severity based on asset criticality, likelihood, and potential business impact.
 - Wrote structured incident reports for higher-priority cases — summary, timeline, indicators of compromise, and recommended remediation.
 - Treated documentation as a deliverable in itself.
 
@@ -90,7 +87,7 @@ Each case below mirrors a real SOC workflow stage — detection, response, netwo
 
 **What I did:**
 - Captured and analyzed live and saved traffic in Wireshark, reading the protocol hierarchy before drilling into individual frames.
-- Used display filters to isolate specific conversations and suspicious patterns — *[e.g., unexpected ports, plaintext credentials, repeated connection attempts]*.
+- Used display filters to isolate specific conversations and suspicious patterns — unexpected ports, plaintext credentials, repeated connection attempts.
 - Followed TCP streams end-to-end to reconstruct what happened in a session.
 - Compared baseline "normal" traffic against anomalous captures.
 
@@ -101,14 +98,14 @@ Each case below mirrors a real SOC workflow stage — detection, response, netwo
 ---
 
 ### CASE-004 · Honeypot Deployment & Threat Intelligence
-`Adversary Intelligence` · `Kali Linux` · `[Honeypot tool]` · **Status: Documented**
+`Adversary Intelligence` · `Kali Linux` · `Cowrie` · **Status: Documented**
 
 **Objective:** Get a firsthand look at what automated attackers actually do, by giving them something to attack inside a safely isolated home lab.
 
 **What I did:**
 - Built and isolated a home lab network segment so the honeypot could be exposed without putting other devices at risk.
-- Deployed a honeypot on Kali Linux to passively log connection attempts, credentials tried, and commands run.
-- Reviewed the resulting logs for patterns — common usernames/passwords attempted, scanning behavior, follow-on actions.
+- Deployed a Cowrie honeypot on Kali Linux to passively log connection attempts, credentials tried, and commands run.
+- Reviewed the resulting logs for patterns — common usernames/passwords attempted, scanning behavior, and follow-on actions.
 - Cross-referenced honeypot activity with Wireshark captures of the same traffic.
 
 **Skills demonstrated:** honeypot configuration · network segmentation · log analysis · attacker TTP identification
@@ -136,7 +133,7 @@ Each case below mirrors a real SOC workflow stage — detection, response, netwo
 |---|---|
 | Detection & Monitoring | Splunk, SPL, dashboard design, log correlation |
 | Network Forensics | Wireshark, protocol analysis, PCAP review, TCP stream reconstruction |
-| Lab & Linux Ops | Kali Linux, honeypot deployment, network segmentation, Linux CLI |
+| Lab & Linux Ops | Kali Linux, honeypot deployment (Cowrie), network segmentation, Linux CLI |
 | IR & Communication | Triage, ticketing, incident reports, stakeholder demos |
 
 ## Repo Structure
@@ -168,9 +165,9 @@ soc-analyst-portfolio/
 
 ## Contact
 
-- **Email:** [your.email@example.com]
-- **LinkedIn:** [linkedin.com/in/you]
-- **GitHub:** [github.com/you]
+- **Email:** agpbarredo@gmail.com
+- **LinkedIn:** (add your LinkedIn URL)
+- **GitHub:** https://github.com/yan-brrd
 
 ---
-*Built as part of a 15-day self-directed SOC training lab. © [Year] [Your Name].*
+*Built as part of a 15-day self-directed SOC training lab. © 2026 Adrian Gian Barredo.*
