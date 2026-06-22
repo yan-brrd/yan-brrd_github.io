@@ -111,7 +111,7 @@
   section{padding:88px 0; border-bottom:1px solid var(--border);}
   .eyebrow{
     font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.12em;
-    font-size:0.78rem; background:linear-gradient(90deg, #ff006e, #b500ff, #00f5ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:14px; display:block;
+    font-size:0.78rem; background:linear-gradient(90deg, #ff006e, #b500ff, #00f5ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:14px; display:inline-block;
   }
   h2{font-family:var(--font-display); font-size:clamp(1.6rem,3.4vw,2.3rem); margin:0 0 36px; font-weight:700; background:linear-gradient(135deg, #00f5ff, #b500ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
 
@@ -196,7 +196,7 @@
   }
   @media (max-width:560px){ .case-stamp{display:none;} }
   .case-id{font-family:var(--font-mono); color:var(--neon-pink); font-size:0.78rem; letter-spacing:0.05em; margin-bottom:8px; display:block;}
-  .case-card h3{font-family:var(--font-display); font-size:1.35rem; margin:0 0 14px; max-width:80%; background:linear-gradient(135deg, #00f5ff, #b500ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+  .case-card h3{font-family:var(--font-display); font-size:1.35rem; margin:0 0 14px; max-width:80%; background:linear-gradient(135deg, #00f5ff, #b500ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; position:relative; z-index:2;}
   .case-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;}
   .tool-chip{
     font-family:var(--font-mono); font-size:0.72rem; color:var(--neon-blue);
@@ -221,6 +221,9 @@
   }
   .evidence a{color:var(--neon-cyan); font-style:normal; text-decoration:underline; text-decoration-color:rgba(0, 245, 255, 0.4);}
   .evidence a:hover{color:var(--neon-green); text-shadow:0 0 8px rgba(57, 255, 20, 0.5);}
+
+  /* Case card link wrapper */
+  .case-card-link{display:block; text-decoration:none; color:inherit; position:relative; z-index:3;}
 
   /* ---------- timeline ---------- */
   .timeline{list-style:none; border-left:2px solid var(--neon-purple); padding-left:0; margin:0;}
@@ -309,7 +312,7 @@
       <p class="sub">A self-directed home lab program covering SIEM detection, network forensics, honeypot intelligence, and incident response — built to develop real SOC analyst habits before day one.</p>
 
       <div class="ticket-queue">
-        <a class="ticket-row" href="#case-001">
+        <a class="ticket-row" href="01-splunk-siem-monitoring/case-001.html">
           <div class="ticket-left">
             <span class="ticket-id">CASE-001 · DETECTION & MONITORING</span>
             <span class="ticket-title">SIEM Threat Detection & Dashboards</span>
@@ -347,8 +350,8 @@
       <h2>Why this lab exists</h2>
       <div class="about-grid">
         <div class="about-text">
-          <p>I'm <strong>Adrian Gian Barredo</strong>, an aspiring SOC Analyst building hands-on detection and response skills outside the classroom. Over 15 intensive days I set up a home lab to practice the four pillars of SOC work: detection, forensics, threat intelligence, and incident response.</p>
-          <p>I'm a graduating Computer Engineering student looking to broaden my scope beyond what's covered in a typical curriculum. Cybersecurity caught my interest early on, and this lab was my chance to go deeper and to build the habits that separate a SOC analyst from someone who just knows the terminology.</p>
+          <p>I'm <strong>Adrian Gian Barredo</strong>, an aspiring SOC Analyst building hands-on detection and response skills outside the classroom. Over 15 intensive days I set up a home lab to practice the kind of work I'll be doing on day one in a real Security Operations Center.</p>
+          <p>I'm a graduating Computer Engineering student looking to broaden my scope beyond what's covered in a typical curriculum. Cybersecurity caught my interest early on, and this lab was my chance to move from theory to real hands-on experience with the tools and workflows that define modern threat detection and incident response.</p>
         </div>
         <div class="about-side">
           <h4>Lab Stack</h4>
@@ -371,8 +374,10 @@
 
       <article class="case-card" id="case-001">
         <span class="case-stamp">Documented</span>
-        <span class="case-id">CASE-001</span>
-        <h3>SIEM Threat Detection & Dashboard Build</h3>
+        <a href="01-splunk-siem-monitoring/case-001.html" class="case-card-link">
+          <span class="case-id">CASE-001</span>
+          <h3>SIEM Threat Detection & Dashboard Build</h3>
+        </a>
         <div class="case-tags">
           <span class="pill pill-amber">Detection & Monitoring</span>
           <span class="tool-chip">Splunk Enterprise</span>
@@ -380,7 +385,7 @@
           <span class="tool-chip">SPL</span>
         </div>
         <span class="case-label">Objective</span>
-        <p>Stand up a working SIEM environment and turn raw security logs into actionable visual monitoring, using "Boss of the SOC" v2 — an industry-standard dataset simulating a real breach against a fictional organization.</p>
+        <p>Stand up a working SIEM environment and turn raw security logs into actionable visual monitoring, using "Boss of the SOC" v2 — an industry-standard dataset simulating a real breach against a simulated network.</p>
         <span class="case-label">What I Did</span>
         <ul>
           <li>Ingested and explored the BOTSv2 dataset in Splunk, learning its index and sourcetype structure before writing any searches.</li>
@@ -395,7 +400,7 @@
           <span class="skill-tag">Dashboard Design</span>
           <span class="skill-tag">Technical Presenting</span>
         </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/01-splunk-siem-monitoring" target="_blank" rel="noopener">/01-splunk-siem-monitoring</a> — SPL queries and dashboard exports</div>
+        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/01-splunk-siem-monitoring" target="_blank" rel="noopener">/01-splunk-siem-monitoring</a> — SPL queries, dashboard exports, screenshots</div>
       </article>
 
       <article class="case-card" id="case-002">
@@ -422,7 +427,7 @@
           <span class="skill-tag">Ticketing Workflows</span>
           <span class="skill-tag">Incident Reporting</span>
         </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/02-incident-response" target="_blank" rel="noopener">/02-incident-response</a> — sample tickets and incident report templates</div>
+        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/02-incident-response" target="_blank" rel="noopener">/02-incident-response</a> — sample tickets and report template</div>
       </article>
 
       <article class="case-card" id="case-003">
@@ -449,7 +454,7 @@
           <span class="skill-tag">Traffic Baselining</span>
           <span class="skill-tag">Anomaly ID</span>
         </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/03-wireshark-traffic-analysis" target="_blank" rel="noopener">/03-wireshark-traffic-analysis</a> — Wireshark captures and analysis notes</div>
+        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/03-wireshark-traffic-analysis" target="_blank" rel="noopener">/03-wireshark-traffic-analysis</a> — capture notes and filter examples</div>
       </article>
 
       <article class="case-card" id="case-004">
@@ -478,7 +483,7 @@
           <span class="skill-tag">Log Analysis</span>
           <span class="skill-tag">Attacker TTP ID</span>
         </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/04-kali-honeypot-homelab" target="_blank" rel="noopener">/04-kali-honeypot-homelab</a> — honeypot config and sample logs</div>
+        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/04-kali-honeypot-homelab" target="_blank" rel="noopener">/04-kali-honeypot-homelab</a> — honeypot logs and network diagram</div>
       </article>
 
     </div>
