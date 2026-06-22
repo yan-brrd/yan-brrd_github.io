@@ -1,294 +1,338 @@
 <!DOCTYPE html>
-<!--
-  SOC ANALYST PORTFOLIO — TRAINING LAB EDITION
-  =============================================
-  BEFORE PUBLISHING, search for and replace every bracketed placeholder:
-    [Your Name]            -> your full name
-    [your.email@example.com] -> your email
-    [linkedin.com/in/you]  -> your LinkedIn URL
-    [github.com/you]       -> your GitHub URL
-    [Year]                 -> current year
-    [Honeypot tool]        -> e.g. Cowrie, Dionaea, T-Pot
-    [Ticketing platform]   -> e.g. osTicket, Jira, TheHive, Zendesk
-  Also review the bracketed detail notes inside each case ("e.g., ...") and
-  swap them for the specific things YOU actually found/did. The timeline
-  section is a general 15-day structure — edit the day ranges and phases to
-  match your real schedule.
--->
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adrian Gian Barredo — SOC Analyst Portfolio</title>
-<meta name="description" content="15-day self-directed SOC training lab: Splunk threat detection, Wireshark traffic analysis, Kali Linux honeypot, and incident response.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#0a0e27;
-    --bg-panel:#0f1536;
-    --bg-panel-raised:#151d42;
-    --border:#1a2555;
-    --text:#e0e8ff;
-    --text-muted:#a0aee8;
-    --text-dim:#6b7aa8;
-    --neon-pink:#ff006e;
-    --neon-cyan:#00f5ff;
-    --neon-purple:#b500ff;
-    --neon-green:#39ff14;
-    --neon-orange:#ff6b35;
-    --neon-blue:#0080ff;
-    --gradient-primary:linear-gradient(135deg, #ff006e 0%, #b500ff 50%, #00f5ff 100%);
-    --gradient-accent:linear-gradient(135deg, #0080ff 0%, #00f5ff 100%);
-    --gradient-warm:linear-gradient(135deg, #ff6b35 0%, #ff006e 100%);
-    --font-display:'Space Grotesk',sans-serif;
-    --font-body:'Inter',sans-serif;
-    --font-mono:'JetBrains Mono',monospace;
-    --container:920px;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Adrian Gian Barredo · SOC Analyst Portfolio</title>
+  <meta name="description" content="15-day self-directed SOC training lab: Splunk threat detection, Wireshark traffic analysis, Kali Linux honeypot, and incident response.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e27;
+      --bg-panel: #0f1536;
+      --bg-panel-raised: #151d42;
+      --border: #1a2555;
+      --text: #e0e8ff;
+      --text-muted: #a0aee8;
+      --text-dim: #6b7aa8;
+      --neon-pink: #ff006e;
+      --neon-cyan: #00f5ff;
+      --neon-purple: #b500ff;
+      --neon-green: #39ff14;
+      --neon-orange: #ff6b35;
+      --neon-blue: #0080ff;
+      --gradient-primary: linear-gradient(135deg, #ff006e 0%, #b500ff 50%, #00f5ff 100%);
+      --gradient-accent: linear-gradient(135deg, #0080ff 0%, #00f5ff 100%);
+      --gradient-warm: linear-gradient(135deg, #ff6b35 0%, #ff006e 100%);
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --container: 1200px;
+      --shadow-glow: 0 8px 32px rgba(0, 245, 255, 0.15);
+      --border-glow: 1px solid rgba(0, 245, 255, 0.25);
+    }
 
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    margin:0;
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--font-body);
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation:none !important; transition:none !important;}
-  }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; background: var(--bg); }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
 
-  a{color:inherit; text-decoration:none;}
-  a:focus-visible, button:focus-visible{outline:2px solid var(--neon-cyan); outline-offset:3px;}
-  ul{margin:0; padding:0;}
-  img{max-width:100%;}
+    /* Global grid & scan effect */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: 
+        linear-gradient(rgba(0, 245, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 245, 255, 0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 3px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.25;
+    }
 
-  .wrap{max-width:var(--container); margin:0 auto; padding:0 24px;}
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation: none !important; transition: none !important; }
+    }
 
-  /* ---------- status bar ---------- */
-  .statusbar{
-    background:linear-gradient(90deg, #0a0e27 0%, rgba(15, 21, 54, 0.8) 50%, #0a0e27 100%);
-    border-bottom:1px solid var(--neon-cyan);
-    border-bottom-color:rgba(0, 245, 255, 0.3);
-    font-family:var(--font-mono);
-    font-size:0.72rem;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color:var(--neon-cyan);
-  }
-  .statusbar .wrap{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:8px 24px; gap:16px; flex-wrap:wrap;
-  }
-  .statusbar .dot{
-    display:inline-block; width:7px; height:7px; border-radius:50%;
-    background:var(--neon-cyan); margin-right:8px; position:relative; top:-1px;
-    animation:pulse 2.4s ease-in-out infinite;
-    box-shadow:0 0 10px var(--neon-cyan);
-  }
-  @keyframes pulse{0%,100%{opacity:1; box-shadow:0 0 10px var(--neon-cyan);} 50%{opacity:0.35; box-shadow:0 0 5px var(--neon-cyan);}}
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--neon-cyan); outline-offset: 3px; border-radius: 4px; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
 
-  /* ---------- nav ---------- */
-  nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(10, 14, 39, 0.92);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid rgba(0, 245, 255, 0.2);
-  }
-  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding:14px 24px;}
-  .logo{font-family:var(--font-display); font-weight:700; font-size:1.05rem; letter-spacing:0.01em; background:var(--gradient-primary); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
-  .logo span{color:var(--neon-cyan);}
-  .navlinks{display:flex; gap:28px; list-style:none; font-size:0.88rem; color:var(--text-muted);}
-  .navlinks a:hover{color:var(--neon-cyan); text-shadow:0 0 8px rgba(0, 245, 255, 0.6);}
-  @media (max-width:640px){ .navlinks{gap:16px; font-size:0.8rem;} }
+    .wrap { 
+      max-width: var(--container); 
+      margin: 0 auto; 
+      padding: 0 28px; 
+      position: relative; 
+      z-index: 2;
+    }
 
-  /* ---------- shared section heading ---------- */
-  section{padding:88px 0; border-bottom:1px solid var(--border);}
-  .eyebrow{
-    font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.12em;
-    font-size:0.78rem; background:linear-gradient(90deg, #ff006e, #b500ff, #00f5ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:14px; display:inline-block;
-  }
-  h2{font-family:var(--font-display); font-size:clamp(1.6rem,3.4vw,2.3rem); margin:0 0 36px; font-weight:700; background:linear-gradient(135deg, #00f5ff, #b500ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+    /* Status bar */
+    .statusbar {
+      background: linear-gradient(90deg, #0a0e27 0%, rgba(15, 21, 54, 0.8) 50%, #0a0e27 100%);
+      border-bottom: 1px solid rgba(0, 245, 255, 0.25);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--neon-cyan);
+      position: relative;
+      z-index: 10;
+    }
+    .statusbar .wrap {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 28px; gap: 20px; flex-wrap: wrap;
+    }
+    .dot {
+      display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+      background: var(--neon-cyan); margin-right: 10px; 
+      box-shadow: 0 0 12px var(--neon-cyan);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-  /* ---------- hero ---------- */
-  .hero{padding-top:96px; padding-bottom:72px; border-bottom:1px solid var(--border);}
-  .hero h1{
-    font-family:var(--font-display); font-weight:700;
-    font-size:clamp(2rem,5vw,3.4rem); line-height:1.16; margin:0 0 24px; max-width:760px;
-    background:linear-gradient(135deg, #ff006e, #00f5ff, #b500ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-  }
-  .hero p.sub{color:var(--text-muted); max-width:560px; font-size:1.05rem; margin:0 0 48px;}
+    /* Navigation */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(10, 14, 39, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0, 245, 255, 0.2);
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; padding: 14px 28px; }
+    .logo {
+      font-family: var(--font-display); font-weight: 700; font-size: 1.2rem;
+      background: var(--gradient-primary); -webkit-background-clip: text; 
+      -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .navlinks { display: flex; gap: 32px; font-size: 0.9rem; color: var(--text-muted); }
+    .navlinks a { transition: 0.2s; }
+    .navlinks a:hover { color: var(--neon-cyan); text-shadow: 0 0 8px rgba(0, 245, 255, 0.7); }
 
-  .ticket-queue{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
-  @media (max-width:680px){ .ticket-queue{grid-template-columns:1fr;} }
-  .ticket-row{
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-    background:var(--bg-panel); border:1px solid rgba(0, 245, 255, 0.3); border-radius:8px;
-    padding:14px 18px; transition:all 0.15s ease;
-  }
-  .ticket-row:hover{
-    background:var(--bg-panel-raised);
-    transform:translateY(-2px);
-    border-color:var(--neon-cyan);
-    box-shadow:0 4px 16px rgba(0, 245, 255, 0.15);
-  }
-  .ticket-left{display:flex; flex-direction:column; gap:3px; min-width:0;}
-  .ticket-id{font-family:var(--font-mono); font-size:0.72rem; color:var(--neon-cyan); letter-spacing:0.05em;}
-  .ticket-title{font-size:0.93rem; font-weight:500;}
+    section { padding: 90px 0; border-bottom: 1px solid rgba(26, 37, 85, 0.7); position: relative; }
 
-  /* ---------- pills ---------- */
-  .pill{
-    font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.08em;
-    font-size:0.66rem; padding:4px 10px; border-radius:4px; border:1px solid currentColor;
-    white-space:nowrap; flex-shrink:0;
-  }
-  .pill-teal{color:var(--neon-cyan); background:rgba(0, 245, 255, 0.12); border-color:var(--neon-cyan);}
-  .pill-amber{color:var(--neon-orange); background:rgba(255, 107, 53, 0.12); border-color:var(--neon-orange);}
-  .pill-red{color:var(--neon-pink); background:rgba(255, 0, 110, 0.12); border-color:var(--neon-pink);}
+    .eyebrow {
+      font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.13em;
+      font-size: 0.75rem; background: linear-gradient(90deg, #ff006e, #b500ff, #00f5ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 12px; display: inline-block;
+    }
+    h2 {
+      font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.6rem);
+      margin: 0 0 48px; font-weight: 700;
+      background: linear-gradient(135deg, #00f5ff, #b500ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
 
-  /* ---------- about ---------- */
-  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:56px; align-items:start;}
-  @media (max-width:760px){ .about-grid{grid-template-columns:1fr; gap:32px;} }
-  .about-text p{color:var(--text-muted); font-size:1rem; margin:0 0 16px;}
-  .about-text p strong{color:var(--neon-cyan); font-weight:600;}
-  .chip-cloud{display:flex; flex-wrap:wrap; gap:8px;}
-  .chip{
-    font-family:var(--font-mono); font-size:0.74rem; color:var(--neon-cyan);
-    background:rgba(0, 245, 255, 0.08); border:1px solid rgba(0, 245, 255, 0.3); border-radius:20px; padding:5px 12px;
-  }
-  .about-side{font-family:var(--font-mono); font-size:0.8rem;}
-  .about-side h4{
-    text-transform:uppercase; letter-spacing:0.08em; color:var(--neon-pink); font-size:0.72rem;
-    margin:0 0 12px; font-weight:600;
-  }
+    /* ---------- HERO REDESIGN ---------- */
+    .hero {
+      padding: 80px 0 70px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 50px; align-items: center;
+    }
+    .hero-content h1 {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.15;
+      background: linear-gradient(135deg, #ff006e, #00f5ff, #b500ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      margin-bottom: 24px;
+    }
+    .hero-content .sub {
+      color: var(--text-muted); font-size: 1.05rem; max-width: 480px; margin-bottom: 32px;
+    }
+    .hero-badge {
+      display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 32px;
+    }
+    .animated-status {
+      font-family: var(--font-mono); font-size: 0.8rem; color: var(--neon-cyan);
+      background: rgba(0, 245, 255, 0.08); border: 1px solid rgba(0, 245, 255, 0.35);
+      border-radius: 30px; padding: 6px 18px; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .hero-visual {
+      background: rgba(15, 21, 54, 0.5);
+      border: 1px solid rgba(0, 245, 255, 0.3);
+      border-radius: 24px;
+      padding: 18px;
+      backdrop-filter: blur(4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .mini-dash {
+      display: flex; gap: 10px; align-items: center;
+      font-family: var(--font-mono); font-size: 0.7rem; color: var(--neon-purple);
+      border-bottom: 1px dashed rgba(0, 245, 255, 0.3); padding-bottom: 12px;
+    }
+    .glow-line {
+      height: 3px; background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple));
+      border-radius: 2px; width: 100%; opacity: 0.8;
+    }
 
-  /* ---------- case cards ---------- */
-  .case-card{
-    position:relative; background:linear-gradient(135deg, rgba(15, 21, 54, 0.8) 0%, rgba(21, 29, 66, 0.6) 100%);
-    border:1px solid rgba(0, 245, 255, 0.2);
-    border-radius:10px; padding:36px; margin-bottom:28px;
-    opacity:0; transform:translateY(14px); transition:all 0.5s ease;
-    overflow:hidden;
-  }
-  .case-card::before{
-    content:''; position:absolute; top:0; left:0; right:0; bottom:0;
-    background:linear-gradient(135deg, rgba(255, 0, 110, 0) 0%, rgba(181, 0, 255, 0.05) 100%);
-    pointer-events:none;
-  }
-  .case-card.is-visible{opacity:1; transform:translateY(0);}
-  .case-card:hover{
-    border-color:rgba(0, 245, 255, 0.5);
-    box-shadow:0 8px 32px rgba(0, 245, 255, 0.15), inset 0 0 1px rgba(0, 245, 255, 0.1);
-  }
-  .case-card:last-child{margin-bottom:0;}
-  .case-stamp{
-    position:absolute; top:30px; right:32px; transform:rotate(-7deg);
-    border:2px solid var(--neon-cyan); color:var(--neon-cyan); padding:4px 12px; border-radius:5px;
-    font-family:var(--font-mono); font-weight:700; text-transform:uppercase;
-    letter-spacing:0.14em; font-size:0.66rem; opacity:0.9;
-    text-shadow:0 0 10px rgba(0, 245, 255, 0.5);
-    z-index:1;
-  }
-  @media (max-width:560px){ .case-stamp{display:none;} }
-  .case-id{font-family:var(--font-mono); color:var(--neon-pink); font-size:0.78rem; letter-spacing:0.05em; margin-bottom:8px; display:block;}
-  .case-card h3{font-family:var(--font-display); font-size:1.35rem; margin:0 0 14px; max-width:80%; background:linear-gradient(135deg, #00f5ff, #b500ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; position:relative; z-index:2;}
-  .case-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px;}
-  .tool-chip{
-    font-family:var(--font-mono); font-size:0.72rem; color:var(--neon-blue);
-    background:rgba(0, 128, 255, 0.1); border:1px solid rgba(0, 128, 255, 0.3); border-radius:20px; padding:4px 11px;
-  }
-  .case-label{
-    font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.1em;
-    font-size:0.68rem; color:var(--neon-pink); margin:20px 0 8px; display:block;
-  }
-  .case-card p{color:var(--text-muted); margin:0; font-size:0.95rem;}
-  .case-card ul{margin:0; padding-left:20px; color:var(--text-muted); font-size:0.95rem;}
-  .case-card ul li{margin-bottom:8px;}
-  .case-card ul li::marker{color:var(--neon-cyan);}
-  .skill-tags{display:flex; flex-wrap:wrap; gap:8px;}
-  .skill-tag{
-    font-family:var(--font-mono); font-size:0.72rem; color:var(--neon-green);
-    background:rgba(57, 255, 20, 0.12); border:1px solid rgba(57, 255, 20, 0.35); border-radius:20px; padding:4px 11px;
-  }
-  .evidence{
-    margin-top:22px; padding-top:18px; border-top:1px dashed var(--neon-purple);
-    font-family:var(--font-mono); font-size:0.8rem; color:var(--text-dim); font-style:italic;
-  }
-  .evidence a{color:var(--neon-cyan); font-style:normal; text-decoration:underline; text-decoration-color:rgba(0, 245, 255, 0.4);}
-  .evidence a:hover{color:var(--neon-green); text-shadow:0 0 8px rgba(57, 255, 20, 0.5);}
+    /* ticket queue inside hero */
+    .ticket-queue { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+    .ticket-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: rgba(15,21,54,0.8); border: 1px solid rgba(0, 245, 255, 0.25);
+      border-radius: 12px; padding: 14px 18px; transition: 0.25s ease;
+      backdrop-filter: blur(5px);
+    }
+    .ticket-row:hover {
+      background: var(--bg-panel-raised); border-color: var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.25); transform: translateY(-2px);
+    }
 
-  /* Case card link wrapper */
-  .case-card-link{display:block; text-decoration:none; color:inherit; position:relative; z-index:3;}
+    /* pills */
+    .pill {
+      font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em;
+      font-size: 0.65rem; padding: 4px 10px; border-radius: 20px; border: 1px solid currentColor;
+      white-space: nowrap;
+    }
+    .pill-teal { color: var(--neon-cyan); background: rgba(0,245,255,0.12); }
+    .pill-amber { color: var(--neon-orange); background: rgba(255,107,53,0.12); }
+    .pill-red { color: var(--neon-pink); background: rgba(255,0,110,0.12); }
 
-  /* ---------- timeline ---------- */
-  .timeline{list-style:none; border-left:2px solid var(--neon-purple); padding-left:0; margin:0;}
-  .timeline-item{
-    position:relative; padding:0 0 36px 32px;
-    opacity:0; transform:translateY(10px); transition:opacity 0.5s ease, transform 0.5s ease;
-  }
-  .timeline-item.is-visible{opacity:1; transform:translateY(0);}
-  .timeline-item:last-child{padding-bottom:0;}
-  .timeline-item::before{
-    content:''; position:absolute; left:-6px; top:4px; width:10px; height:10px;
-    border-radius:50%; background:var(--bg); border:2px solid var(--neon-cyan);
-    box-shadow:0 0 8px rgba(0, 245, 255, 0.6);
-  }
-  .timeline-day{font-family:var(--font-mono); color:var(--neon-pink); font-size:0.78rem; letter-spacing:0.06em; margin-bottom:4px; display:block;}
-  .timeline-item h4{font-family:var(--font-display); font-size:1.05rem; margin:0 0 6px; color:var(--neon-cyan);}
-  .timeline-item p{color:var(--text-muted); margin:0; font-size:0.92rem; max-width:560px;}
+    /* ---------- ANALYST PROFILE (Dossier) ---------- */
+    .dossier-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px;
+      background: linear-gradient(135deg, rgba(15,21,54,0.7) 0%, rgba(21,29,66,0.5) 100%);
+      border: 1px solid rgba(0, 245, 255, 0.25);
+      border-radius: 28px; padding: 32px;
+      backdrop-filter: blur(8px);
+    }
+    .profile-card {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .avatar {
+      width: 100px; height: 100px; background: var(--gradient-primary);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 2.8rem; font-weight: 700;
+      margin-bottom: 16px; box-shadow: 0 0 30px rgba(255,0,110,0.4);
+    }
+    .designation {
+      font-family: var(--font-mono); color: var(--neon-cyan); letter-spacing: 0.1em;
+      font-size: 0.8rem; margin: 8px 0;
+    }
+    .stats-mini {
+      display: flex; gap: 20px; margin: 18px 0; font-family: var(--font-mono); font-size: 0.8rem;
+    }
+    .mission-panel {
+      border-left: 2px solid var(--neon-purple); padding-left: 28px;
+    }
 
-  /* ---------- skills matrix ---------- */
-  .skills-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:28px;}
-  @media (max-width:680px){ .skills-grid{grid-template-columns:1fr;} }
-  .skill-cat{
-    background:linear-gradient(135deg, rgba(15, 21, 54, 0.8) 0%, rgba(21, 29, 66, 0.6) 100%);
-    border:1px solid rgba(0, 245, 255, 0.2); border-radius:10px; padding:24px;
-    transition:all 0.3s ease;
-  }
-  .skill-cat:hover{
-    border-color:rgba(0, 245, 255, 0.5);
-    box-shadow:0 8px 24px rgba(0, 245, 255, 0.1);
-  }
-  .skill-cat h4{font-family:var(--font-display); font-size:1rem; margin:0 0 14px; background:linear-gradient(135deg, #00f5ff, #b500ff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
-  .skill-cat .chip-cloud .chip{color:var(--neon-cyan);}
+    /* ---------- 2x2 CASE GRID ---------- */
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+    }
+    .case-card {
+      position: relative;
+      background: linear-gradient(145deg, rgba(15,21,54,0.8) 0%, rgba(21,29,66,0.7) 100%);
+      border: 1px solid rgba(0, 245, 255, 0.2);
+      border-radius: 24px; padding: 28px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(6px);
+      display: flex; flex-direction: column;
+    }
+    .case-card:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 16px 40px rgba(0, 245, 255, 0.2);
+      transform: translateY(-5px);
+      background: rgba(21,29,66,0.8);
+    }
+    .case-stamp {
+      position: absolute; top: 20px; right: 24px; transform: rotate(-5deg);
+      border: 2px solid var(--neon-cyan); color: var(--neon-cyan); padding: 4px 12px;
+      border-radius: 20px; font-family: var(--font-mono); font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.65rem;
+      background: rgba(0,0,0,0.4);
+    }
+    .case-id { font-family: var(--font-mono); color: var(--neon-pink); font-size: 0.75rem; margin-bottom: 10px; }
+    .case-card h3 {
+      font-family: var(--font-display); font-size: 1.25rem; margin: 0 0 14px;
+      background: linear-gradient(135deg, #00f5ff, #b500ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
 
-  /* ---------- contact ---------- */
-  .contact-ticket{
-    background:linear-gradient(135deg, rgba(15, 21, 54, 0.9) 0%, rgba(21, 29, 66, 0.7) 100%);
-    border:1px solid rgba(0, 245, 255, 0.3); border-radius:10px;
-    padding:40px; position:relative; max-width:640px;
-    transition:all 0.3s ease;
-  }
-  .contact-ticket:hover{
-    border-color:rgba(0, 245, 255, 0.6);
-    box-shadow:0 8px 32px rgba(0, 245, 255, 0.15);
-  }
-  .contact-stamp{
-    position:absolute; top:32px; right:34px; transform:rotate(-7deg);
-    border:2px solid var(--neon-pink); color:var(--neon-pink); padding:4px 12px; border-radius:5px;
-    font-family:var(--font-mono); font-weight:700; text-transform:uppercase;
-    letter-spacing:0.14em; font-size:0.66rem;
-    text-shadow:0 0 10px rgba(255, 0, 110, 0.5);
-  }
-  @media (max-width:560px){ .contact-stamp{display:none;} }
-  .field-row{display:flex; gap:18px; padding:11px 0; border-bottom:1px solid rgba(0, 245, 255, 0.15); font-size:0.92rem;}
-  .field-row:last-of-type{border-bottom:none;}
-  .field-key{font-family:var(--font-mono); color:var(--neon-pink); text-transform:uppercase; font-size:0.7rem; letter-spacing:0.08em; width:110px; flex-shrink:0; padding-top:3px;}
-  .field-val a:hover{color:var(--neon-cyan); text-shadow:0 0 8px rgba(0, 245, 255, 0.6);}
-  footer{padding:32px 0; text-align:center; font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim);}
-</style>
+    /* ---------- SNAKE TIMELINE ---------- */
+    .snake-timeline {
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .timeline-row {
+      display: flex; align-items: center; gap: 20px;
+    }
+    .timeline-row.reverse {
+      flex-direction: row-reverse;
+    }
+    .timeline-node {
+      background: var(--bg-panel); border: 1px solid var(--neon-purple);
+      border-radius: 16px; padding: 18px 22px; flex: 1;
+      transition: 0.2s; position: relative;
+    }
+    .timeline-node:hover {
+      border-color: var(--neon-cyan); box-shadow: 0 0 20px rgba(0,245,255,0.3);
+    }
+    .connector {
+      width: 40px; height: 2px; background: var(--neon-purple);
+      position: relative;
+    }
+    .connector::after {
+      content: ""; position: absolute; right: -5px; top: -4px;
+      width: 10px; height: 10px; background: var(--neon-cyan); border-radius: 50%;
+    }
+    .timeline-day { font-family: var(--font-mono); color: var(--neon-pink); font-size: 0.7rem; }
+
+    /* skills command center */
+    .skills-command {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 24px;
+    }
+    .skill-hex {
+      background: rgba(15,21,54,0.7); border: 1px solid rgba(0,245,255,0.2);
+      border-radius: 20px; padding: 24px 18px; text-align: center;
+      transition: 0.3s;
+    }
+    .skill-hex:hover { border-color: var(--neon-cyan); box-shadow: 0 0 25px rgba(0,245,255,0.25); }
+
+    .contact-ticket { /* existing style enhanced */ }
+
+    footer { padding: 32px 0; text-align: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); }
+
+    @media (max-width: 900px) {
+      .case-grid { grid-template-columns: 1fr; }
+      .dossier-grid { grid-template-columns: 1fr; }
+      .skills-command { grid-template-columns: repeat(2,1fr); }
+      .hero-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-
   <div class="statusbar">
     <div class="wrap">
-      <span><span class="dot"></span>TRAINING LOG // ACTIVE</span>
-      <span>SOC-TRAINING-LAB // 15-DAY PROGRAM // Adrian Gian Barredo</span>
+      <span><span class="dot"></span>TRAINING LOG · ACTIVE</span>
+      <span>SOC-TRAINING-LAB // 15-DAY PROGRAM // ADRIAN GIAN BARREDO</span>
     </div>
   </div>
 
@@ -307,60 +351,60 @@
 
   <header class="hero" id="top">
     <div class="wrap">
-      <span class="eyebrow">SOC Analyst Portfolio / Training Lab</span>
-      <h1>Four cases. Four disciplines.<br>One 15-day deep dive into threat monitoring.</h1>
-      <p class="sub">A self-directed home lab program covering SIEM detection, network forensics, honeypot intelligence, and incident response — built to develop real SOC analyst habits before day one.</p>
-
-      <div class="ticket-queue">
-        <a class="ticket-row" href="01-splunk-siem-monitoring/case-001.html">
-          <div class="ticket-left">
-            <span class="ticket-id">CASE-001 · DETECTION & MONITORING</span>
-            <span class="ticket-title">SIEM Threat Detection & Dashboards</span>
+      <div class="hero-grid">
+        <div class="hero-content">
+          <span class="eyebrow">SOC Analyst Portfolio / Training Lab</span>
+          <h1>Four cases. Four disciplines.<br>One 15-day deep dive.</h1>
+          <p class="sub">A self-directed home lab program covering SIEM detection, network forensics, honeypot intelligence, and incident response — built to develop real SOC analyst habits.</p>
+          <div class="hero-badge">
+            <span class="animated-status"><span class="dot"></span> MISSION ACTIVE</span>
+            <span class="pill pill-teal">15-DAY CYCLE</span>
           </div>
-          <span class="pill pill-teal">Documented</span>
-        </a>
-        <a class="ticket-row" href="#case-002">
-          <div class="ticket-left">
-            <span class="ticket-id">CASE-002 · INCIDENT RESPONSE</span>
-            <span class="ticket-title">Triage, Ticketing & Reporting</span>
+        </div>
+        <div class="hero-visual">
+          <div class="mini-dash">
+            <span>📡 SIGNAL INTEL</span>
+            <span style="margin-left:auto;">04 CASES</span>
           </div>
-          <span class="pill pill-teal">Documented</span>
-        </a>
-        <a class="ticket-row" href="#case-003">
-          <div class="ticket-left">
-            <span class="ticket-id">CASE-003 · NETWORK FORENSICS</span>
-            <span class="ticket-title">Wireshark Traffic Analysis</span>
+          <div class="glow-line"></div>
+          <div style="display:flex; gap:8px; margin-top:8px;">
+            <span class="pill pill-amber">SPLUNK</span>
+            <span class="pill pill-teal">WIRESHARK</span>
+            <span class="pill pill-red">HONEYPOT</span>
           </div>
-          <span class="pill pill-teal">Documented</span>
-        </a>
-        <a class="ticket-row" href="#case-004">
-          <div class="ticket-left">
-            <span class="ticket-id">CASE-004 · ADVERSARY INTEL</span>
-            <span class="ticket-title">Kali Linux Honeypot Lab</span>
-          </div>
-          <span class="pill pill-teal">Documented</span>
-        </a>
+        </div>
+      </div>
+      <div class="ticket-queue" style="margin-top:40px;">
+        <a class="ticket-row" href="#case-001"><div class="ticket-left"><span class="ticket-id">CASE-001</span><span class="ticket-title">SIEM Threat Detection</span></div><span class="pill pill-teal">Doc</span></a>
+        <a class="ticket-row" href="#case-002"><div class="ticket-left"><span class="ticket-id">CASE-002</span><span class="ticket-title">Incident Response</span></div><span class="pill pill-teal">Doc</span></a>
+        <a class="ticket-row" href="#case-003"><div class="ticket-left"><span class="ticket-id">CASE-003</span><span class="ticket-title">Network Forensics</span></div><span class="pill pill-teal">Doc</span></a>
+        <a class="ticket-row" href="#case-004"><div class="ticket-left"><span class="ticket-id">CASE-004</span><span class="ticket-title">Honeypot Intel</span></div><span class="pill pill-teal">Doc</span></a>
       </div>
     </div>
   </header>
 
   <section id="about">
     <div class="wrap">
-      <span class="eyebrow">Analyst Profile</span>
-      <h2>Why this lab exists</h2>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>I'm <strong>Adrian Gian Barredo</strong>, an aspiring SOC Analyst building hands-on detection and response skills outside the classroom. Over 15 intensive days I set up a home lab to practice the kind of work I'll be doing on day one in a real Security Operations Center.</p>
-          <p>I'm a graduating Computer Engineering student looking to broaden my scope beyond what's covered in a typical curriculum. Cybersecurity caught my interest early on, and this lab was my chance to move from theory to real hands-on experience with the tools and workflows that define modern threat detection and incident response.</p>
+      <span class="eyebrow">Analyst Dossier</span>
+      <h2>Profile & Mission</h2>
+      <div class="dossier-grid">
+        <div class="profile-card">
+          <div class="avatar">AGB</div>
+          <h3 style="color:white; margin:0;">Adrian Gian Barredo</h3>
+          <div class="designation">SOC ANALYST (IN TRAINING)</div>
+          <div class="stats-mini">
+            <span>🔹 4 cases</span>
+            <span>🔹 15 days</span>
+          </div>
+          <div class="chip-cloud" style="margin-top:12px;">
+            <span class="chip">Splunk</span><span class="chip">Kali</span><span class="chip">Wireshark</span>
+          </div>
         </div>
-        <div class="about-side">
-          <h4>Lab Stack</h4>
-          <div class="chip-cloud">
-            <span class="chip">Splunk Enterprise</span>
-            <span class="chip">BOTSv2 Dataset</span>
-            <span class="chip">Wireshark</span>
-            <span class="chip">Kali Linux</span>
-            <span class="chip">Cowrie</span>
+        <div class="mission-panel">
+          <p style="color:var(--text-muted); margin-bottom:16px;"><strong style="color:var(--neon-cyan);">Objective:</strong> Build hands-on detection & response skills through a self-directed SOC lab. I'm a graduating Computer Engineering student expanding beyond the classroom into real security operations.</p>
+          <div style="display:flex; gap:24px; flex-wrap:wrap;">
+            <div><span style="color:var(--neon-pink);">📍 Lab Stack</span><br>Splunk Enterprise, BOTSv2, Cowrie</div>
+            <div><span style="color:var(--neon-pink);">📋 Status</span><br>Active investigation</div>
           </div>
         </div>
       </div>
@@ -371,121 +415,44 @@
     <div class="wrap">
       <span class="eyebrow">04 Investigations Logged</span>
       <h2>Case Files</h2>
-
-      <article class="case-card" id="case-001">
-        <span class="case-stamp">Documented</span>
-        <a href="01-splunk-siem-monitoring/case-001.html" class="case-card-link">
+      <div class="case-grid">
+        <article class="case-card" id="case-001">
+          <span class="case-stamp">Documented</span>
           <span class="case-id">CASE-001</span>
-          <h3>SIEM Threat Detection & Dashboard Build</h3>
-        </a>
-        <div class="case-tags">
-          <span class="pill pill-amber">Detection & Monitoring</span>
-          <span class="tool-chip">Splunk Enterprise</span>
-          <span class="tool-chip">BOTSv2 Dataset</span>
-          <span class="tool-chip">SPL</span>
-        </div>
-        <span class="case-label">Objective</span>
-        <p>Stand up a working SIEM environment and turn raw security logs into actionable visual monitoring, using "Boss of the SOC" v2 — an industry-standard dataset simulating a real breach against a simulated network.</p>
-        <span class="case-label">What I Did</span>
-        <ul>
-          <li>Ingested and explored the BOTSv2 dataset in Splunk, learning its index and sourcetype structure before writing any searches.</li>
-          <li>Wrote SPL queries to surface indicators of compromise — e.g., suspicious authentication activity, anomalous process execution, unusual DNS query patterns.</li>
-          <li>Designed and built Splunk dashboards from scratch: panels, visualizations, and time-range controls aimed at giving an analyst a fast read on environment health.</li>
-          <li>Rehearsed the dashboard as a live demo, practicing how to walk a non-technical audience through what each panel means and why it matters.</li>
-        </ul>
-        <span class="case-label">Skills Demonstrated</span>
-        <div class="skill-tags">
-          <span class="skill-tag">SPL Query Writing</span>
-          <span class="skill-tag">Log Correlation</span>
-          <span class="skill-tag">Dashboard Design</span>
-          <span class="skill-tag">Technical Presenting</span>
-        </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/01-splunk-siem-monitoring" target="_blank" rel="noopener">/01-splunk-siem-monitoring</a> — SPL queries, dashboard exports, screenshots</div>
-      </article>
-
-      <article class="case-card" id="case-002">
-        <span class="case-stamp">Documented</span>
-        <span class="case-id">CASE-002</span>
-        <h3>Incident Triage, Ticketing & Reporting</h3>
-        <div class="case-tags">
-          <span class="pill pill-teal">Incident Response</span>
-          <span class="tool-chip">Incident Report Writing</span>
-        </div>
-        <span class="case-label">Objective</span>
-        <p>Practice the part of SOC work that happens after detection — deciding what matters, tracking it, and writing it up the way a real analyst hands a case off to the next shift.</p>
-        <span class="case-label">What I Did</span>
-        <ul>
-          <li>Logged alerts and findings from the Splunk dashboard work as tickets, rather than leaving them as one-off searches.</li>
-          <li>Practiced triage: assigning priority and severity based on asset criticality, likelihood, potential business impact instead of treating every alert the same.</li>
-          <li>Wrote structured incident reports for higher-priority cases — summary, timeline of events, indicators of compromise, and recommended remediation steps.</li>
-          <li>Treated documentation as a deliverable in itself: a finding that isn't written up clearly doesn't help the next analyst on shift.</li>
-        </ul>
-        <span class="case-label">Skills Demonstrated</span>
-        <div class="skill-tags">
-          <span class="skill-tag">Alert Triage</span>
-          <span class="skill-tag">Prioritization</span>
-          <span class="skill-tag">Ticketing Workflows</span>
-          <span class="skill-tag">Incident Reporting</span>
-        </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/02-incident-response" target="_blank" rel="noopener">/02-incident-response</a> — sample tickets and report template</div>
-      </article>
-
-      <article class="case-card" id="case-003">
-        <span class="case-stamp">Documented</span>
-        <span class="case-id">CASE-003</span>
-        <h3>Network Traffic & Packet Analysis</h3>
-        <div class="case-tags">
-          <span class="pill pill-amber">Network Forensics</span>
-          <span class="tool-chip">Wireshark</span>
-        </div>
-        <span class="case-label">Objective</span>
-        <p>Build the habit of reading raw network traffic instead of trusting summaries — since most SOC tools eventually point back to "go look at the packets."</p>
-        <span class="case-label">What I Did</span>
-        <ul>
-          <li>Captured and analyzed live and saved traffic in Wireshark, reading the protocol hierarchy before drilling into individual frames.</li>
-          <li>Used display filters to isolate specific conversations and suspicious patterns — e.g., unexpected ports, plaintext credentials, repeated connection attempts.</li>
-          <li>Followed TCP streams end-to-end to reconstruct what actually happened in a session, not just that something happened.</li>
-          <li>Compared baseline "normal" traffic against anomalous captures to build a feel for what should draw an analyst's attention.</li>
-        </ul>
-        <span class="case-label">Skills Demonstrated</span>
-        <div class="skill-tags">
-          <span class="skill-tag">Packet Analysis</span>
-          <span class="skill-tag">Wireshark Filters</span>
-          <span class="skill-tag">Traffic Baselining</span>
-          <span class="skill-tag">Anomaly ID</span>
-        </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/03-wireshark-traffic-analysis" target="_blank" rel="noopener">/03-wireshark-traffic-analysis</a> — capture notes and filter examples</div>
-      </article>
-
-      <article class="case-card" id="case-004">
-        <span class="case-stamp">Documented</span>
-        <span class="case-id">CASE-004</span>
-        <h3>Honeypot Deployment & Threat Intelligence</h3>
-        <div class="case-tags">
-          <span class="pill pill-red">Adversary Intelligence</span>
-          <span class="tool-chip">Kali Linux</span>
-          <span class="tool-chip">Cowrie</span>
-          <span class="tool-chip">Home Lab</span>
-        </div>
-        <span class="case-label">Objective</span>
-        <p>Get a firsthand, unfiltered look at what automated attackers actually do, by giving them something to attack inside a safely isolated home lab.</p>
-        <span class="case-label">What I Did</span>
-        <ul>
-          <li>Built and isolated a home lab network segment so the honeypot could be exposed without putting other devices at risk.</li>
-          <li>Deployed a honeypot on Kali Linux to passively log connection attempts, credentials tried, and commands run by anyone who interacted with it.</li>
-          <li>Reviewed the resulting logs for patterns — common usernames/passwords attempted, scanning behavior, and any follow-on actions.</li>
-          <li>Cross-referenced honeypot activity with Wireshark captures of the same traffic to connect application-layer logs with what was visible on the wire.</li>
-        </ul>
-        <span class="case-label">Skills Demonstrated</span>
-        <div class="skill-tags">
-          <span class="skill-tag">Honeypot Config</span>
-          <span class="skill-tag">Network Segmentation</span>
-          <span class="skill-tag">Log Analysis</span>
-          <span class="skill-tag">Attacker TTP ID</span>
-        </div>
-        <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/04-kali-honeypot-homelab" target="_blank" rel="noopener">/04-kali-honeypot-homelab</a> — honeypot logs and network diagram</div>
-      </article>
-
+          <h3>SIEM Threat Detection & Dashboard</h3>
+          <div class="case-tags"><span class="pill pill-amber">Detection</span><span class="tool-chip">Splunk</span></div>
+          <p>Ingested BOTSv2, wrote SPL queries, built dashboards for live monitoring.</p>
+          <div class="skill-tags"><span class="skill-tag">SPL</span><span class="skill-tag">Correlation</span></div>
+          <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/01-splunk-siem-monitoring" target="_blank">/01-splunk-siem-monitoring</a></div>
+        </article>
+        <article class="case-card" id="case-002">
+          <span class="case-stamp">Documented</span>
+          <span class="case-id">CASE-002</span>
+          <h3>Incident Triage & Reporting</h3>
+          <div class="case-tags"><span class="pill pill-teal">IR</span></div>
+          <p>Alert triage, ticketing workflows, structured incident reports.</p>
+          <div class="skill-tags"><span class="skill-tag">Triage</span><span class="skill-tag">Reporting</span></div>
+          <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/02-incident-response" target="_blank">/02-incident-response</a></div>
+        </article>
+        <article class="case-card" id="case-003">
+          <span class="case-stamp">Documented</span>
+          <span class="case-id">CASE-003</span>
+          <h3>Network Traffic Analysis</h3>
+          <div class="case-tags"><span class="pill pill-amber">Forensics</span></div>
+          <p>Wireshark captures, TCP stream reconstruction, anomaly detection.</p>
+          <div class="skill-tags"><span class="skill-tag">PCAP</span><span class="skill-tag">Filters</span></div>
+          <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/tree/main/03-wireshark-traffic-analysis" target="_blank">/03-wireshark-traffic-analysis</a></div>
+        </article>
+        <article class="case-card" id="case-004">
+          <span class="case-stamp">Documented</span>
+          <span class="case-id">CASE-004</span>
+          <h3>Honeypot & Threat Intel</h3>
+          <div class="case-tags"><span class="pill pill-red">Intel</span></div>
+          <p>Kali Linux + Cowrie honeypot, attacker TTP identification.</p>
+          <div class="skill-tags"><span class="skill-tag">Honeypot</span><span class="skill-tag">Logs</span></div>
+          <div class="evidence">📁 <a href="https://github.com/yan-brrd/yan-brrd_github.io/blob/main/04-kali-honeypot-homelab" target="_blank">/04-kali-honeypot-homelab</a></div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -493,70 +460,35 @@
     <div class="wrap">
       <span class="eyebrow">15 Days</span>
       <h2>Program Timeline</h2>
-      <ul class="timeline">
-        <li class="timeline-item">
-          <span class="timeline-day">DAY 1–2</span>
-          <h4>Foundations</h4>
-          <p>Core cybersecurity awareness, threat landscape orientation, and home lab environment setup.</p>
-        </li>
-        <li class="timeline-item">
-          <span class="timeline-day">DAY 3–6</span>
-          <h4>SIEM Monitoring</h4>
-          <p>Splunk setup, BOTSv2 ingestion, SPL practice, dashboard build, and live demo rehearsal.</p>
-        </li>
-        <li class="timeline-item">
-          <span class="timeline-day">DAY 7–9</span>
-          <h4>Network Forensics</h4>
-          <p>Wireshark capture and filter practice, baseline-vs-anomaly traffic comparison.</p>
-        </li>
-        <li class="timeline-item">
-          <span class="timeline-day">DAY 10–12</span>
-          <h4>Adversary Lab</h4>
-          <p>Kali Linux honeypot deployment, network isolation, and live attack log collection.</p>
-        </li>
-        <li class="timeline-item">
-          <span class="timeline-day">DAY 13–14</span>
-          <h4>Incident Response</h4>
-          <p>Ticketing workflow setup, alert triage practice, and incident report writing.</p>
-        </li>
-        <li class="timeline-item">
-          <span class="timeline-day">DAY 15</span>
-          <h4>Wrap-Up</h4>
-          <p>Portfolio documentation, dashboard demo rehearsal, and lessons-learned review.</p>
-        </li>
-      </ul>
+      <div class="snake-timeline">
+        <div class="timeline-row">
+          <div class="timeline-node"><span class="timeline-day">DAY 1-2</span><h4>Foundations</h4><p>Lab setup & threat landscape.</p></div>
+          <div class="connector"></div>
+          <div class="timeline-node"><span class="timeline-day">DAY 3-6</span><h4>SIEM Monitoring</h4><p>Splunk, SPL, dashboards.</p></div>
+        </div>
+        <div class="timeline-row reverse">
+          <div class="timeline-node"><span class="timeline-day">DAY 7-9</span><h4>Network Forensics</h4><p>Wireshark analysis.</p></div>
+          <div class="connector"></div>
+          <div class="timeline-node"><span class="timeline-day">DAY 10-12</span><h4>Adversary Lab</h4><p>Honeypot deployment.</p></div>
+        </div>
+        <div class="timeline-row">
+          <div class="timeline-node"><span class="timeline-day">DAY 13-14</span><h4>Incident Response</h4><p>Ticketing & reports.</p></div>
+          <div class="connector"></div>
+          <div class="timeline-node"><span class="timeline-day">DAY 15</span><h4>Wrap-Up</h4><p>Portfolio & review.</p></div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section id="skills">
     <div class="wrap">
-      <span class="eyebrow">By Category</span>
+      <span class="eyebrow">Command Center</span>
       <h2>Skill Set</h2>
-      <div class="skills-grid">
-        <div class="skill-cat">
-          <h4>Detection & Monitoring</h4>
-          <div class="chip-cloud">
-            <span class="chip">Splunk</span><span class="chip">SPL</span><span class="chip">Dashboard Design</span><span class="chip">Log Correlation</span>
-          </div>
-        </div>
-        <div class="skill-cat">
-          <h4>Network Forensics</h4>
-          <div class="chip-cloud">
-            <span class="chip">Wireshark</span><span class="chip">Protocol Analysis</span><span class="chip">PCAP Review</span><span class="chip">TCP Stream Reconstruction</span>
-          </div>
-        </div>
-        <div class="skill-cat">
-          <h4>Lab & Linux Ops</h4>
-          <div class="chip-cloud">
-            <span class="chip">Kali Linux</span><span class="chip">Honeypot Deployment</span><span class="chip">Network Segmentation</span><span class="chip">Linux CLI</span>
-          </div>
-        </div>
-        <div class="skill-cat">
-          <h4>IR & Communication</h4>
-          <div class="chip-cloud">
-            <span class="chip">Triage</span><span class="chip">Ticketing</span><span class="chip">Incident Reports</span><span class="chip">Stakeholder Demos</span>
-          </div>
-        </div>
+      <div class="skills-command">
+        <div class="skill-hex"><h4>Detection</h4><div class="chip-cloud"><span class="chip">Splunk</span><span class="chip">SPL</span></div></div>
+        <div class="skill-hex"><h4>Forensics</h4><div class="chip-cloud"><span class="chip">Wireshark</span><span class="chip">PCAP</span></div></div>
+        <div class="skill-hex"><h4>Lab Ops</h4><div class="chip-cloud"><span class="chip">Kali</span><span class="chip">Honeypot</span></div></div>
+        <div class="skill-hex"><h4>IR & Comms</h4><div class="chip-cloud"><span class="chip">Triage</span><span class="chip">Reports</span></div></div>
       </div>
     </div>
   </section>
@@ -565,40 +497,35 @@
     <div class="wrap">
       <span class="eyebrow">Status: Open</span>
       <h2>Open a Line</h2>
-      <div class="contact-ticket">
+      <div class="contact-ticket" style="background:rgba(15,21,54,0.9); border-radius:24px; padding:32px;">
         <span class="contact-stamp">New Ticket</span>
         <div class="field-row"><span class="field-key">Reporter</span><span class="field-val">Adrian Gian Barredo</span></div>
-        <div class="field-row"><span class="field-key">Priority</span><span class="field-val">Entry-Level SOC Analyst / Security Operations roles</span></div>
+        <div class="field-row"><span class="field-key">Priority</span><span class="field-val">Entry-Level SOC Analyst</span></div>
         <div class="field-row"><span class="field-key">Email</span><span class="field-val"><a href="mailto:agpbarredo@gmail.com">agpbarredo@gmail.com</a></span></div>
-        <div class="field-row"><span class="field-key">GitHub</span><span class="field-val"><a href="https://github.com/yan-brrd/yan-brrd_github.io" target="_blank" rel="noopener">github.com/yan-brrd</a></span></div>
-        <div class="field-row"><span class="field-key">Status</span><span class="field-val"><span class="pill pill-amber">Open</span></span></div>
+        <div class="field-row"><span class="field-key">GitHub</span><span class="field-val"><a href="https://github.com/yan-brrd/yan-brrd_github.io" target="_blank">github.com/yan-brrd</a></span></div>
       </div>
     </div>
   </section>
 
-  <footer>
-    Built as part of a 15-day self-directed SOC training lab. © 2026 Adrian Gian Barredo.
-  </footer>
+  <footer>Built as part of a 15-day self-directed SOC training lab. © 2026 Adrian Gian Barredo.</footer>
 
   <script>
-    (function(){
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var targets = document.querySelectorAll('.case-card, .timeline-item');
-      if (reduceMotion || !('IntersectionObserver' in window)) {
-        targets.forEach(function(el){ el.classList.add('is-visible'); });
-        return;
-      }
-      var observer = new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
+    (function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
           }
         });
-      }, { threshold: 0.15 });
-      targets.forEach(function(el){ observer.observe(el); });
+      }, { threshold: 0.2 });
+      document.querySelectorAll('.case-card, .timeline-node').forEach(el => {
+        el.style.opacity = 0;
+        el.style.transform = 'translateY(10px)';
+        el.style.transition = '0.5s ease';
+        observer.observe(el);
+      });
     })();
   </script>
-
 </body>
 </html>
